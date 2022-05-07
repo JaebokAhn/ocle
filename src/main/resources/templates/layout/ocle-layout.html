@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <title layout:title-pattern="$LAYOUT_TITLE > $CONTENT_TITLE">OCLE</title>
+    <link rel="stylesheet" type="text/css" href="/common/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/common/css/font.css" />
+    <link rel="stylesheet" type="text/css" href="/common/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/common/css/common.css" />
+    <script type="text/javascript" src="/common/js/_webponent/jquery/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/common/js/common.js"></script>
+</head>
+<body>
+<div th:replace="~{layout/ocle-header :: sitemap}"></div>
+<div class="container" layout:fragment="content">
+</div>
+<div th:replace="~{layout/ocle-footer :: footer}"/>
+</body>
+</html>

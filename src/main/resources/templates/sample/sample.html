@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/ocle-layout}"
+>
+<head>
+    <title>sample</title>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        jQuery(document).ready(function() {
+            alert([[${msgeCntn}]]);
+        });
+        /*]]>*/
+    </script>
+</head>
+<body>
+<div layout:fragment="content">
+    컨텐트 내용 작성
+</div>
+</body>
+</html>

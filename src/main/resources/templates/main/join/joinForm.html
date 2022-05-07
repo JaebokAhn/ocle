@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/ocle-layout}"
+>
+<head>
+    <title>회원가입</title>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        /*]]>*/
+    </script>
+</head>
+<body>
+<div layout:fragment="content">
+    <form method="POST">
+        <input type="text" name="username" placeholder="이메일 주소" /><br />
+        <input type="password" name="password" placeholder="비밀번호" /><br />
+        <button type="submit">회원가입</button>
+    </form>
+</div>
+</body>
+</html>

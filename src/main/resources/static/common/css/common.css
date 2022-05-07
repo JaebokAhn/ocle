@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+table {width:100%; border: 0; margin-top:8px; margin-left: -1px; border-top: 1px solid #666; border-bottom: 1px solid #ddd;}
+table thead th {padding: 9px 12px; border: 1px solid #ddd; border-top: 0; border-right: 0; background: #f3f2ec; text-align: center; font-weight: normal;}
+table tbody th {padding: 9px 3px; border: 1px solid #ddd; border-bottom: 0; border-right: 0; background: #f8f7f4; text-align: center; font-weight: normal;}
+table tbody td.tit {padding: 9px 12px; border: 1px solid #ddd; border-bottom: 0; border-right: 0; background: #f8f7f4; text-align: center; font-weight: normal;}
+table tbody th.tal {text-align: left; padding: 9px 12px; }
+table tbody td.tal {text-align: left; padding: 2px 8px; }
+table thead th.buleTh		{background:#dae5f1; color:#477dba; }
+table thead th.redTh			{background:#f3dada; color:#477dba; }
+table tbody td.buleTd		{color:#477dba;}
+table tbody td.redTd			{color:#477dba;}
+table tbody td .golink {font-size: 14px;color: #000}
+table tbody td .golink:hover {color:#de690a;}
+table tbody td .gray {color: #666}
+table tbody td .btn_opennew {font-size: 14px;color: #000}
+table tbody table thead th {border-bottom: 1px solid #ddd}
+
+
+
+/*JB ADD*/
+table tbody td div.in-valid {color: red}

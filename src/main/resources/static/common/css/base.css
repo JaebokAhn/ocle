@@ -1,0 +1,127 @@
+@charset "utf-8";
+* {margin:0;padding:0;}
+html	{padding:0; margin:0; overflow-y:scroll; }
+body,button,input	{font-size:14px; color:#000; }
+body,div,p,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,blockquote,select,a,textarea,input,button
+{font-family:'맑은 고딕','Malgun Gothic','Nanum Gothic','돋움',dotum,sans-serif;}
+/**/
+body, div,p,ol,ul,li,dl,dt,dd, span,em,strong,label,input,form, h1,h2,h3,h4,h5,h6, address,td,th,table,
+object,blockquote,pre,abbr,cite,code,del,dfn,img,ins,kbd,q,samp,small,var,b,i,fieldset,iframe,legend,article,
+aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video
+{line-height:140%; }
+
+/*
+body .containerDiv  {font-size:13px; font-family:'맑은 고딕','Malgun Gothic','Nanum Gothic','돋움',dotum,sans-serif;}
+body .ui-widget  {font-size:13px; font-family:'맑은 고딕','Malgun Gothic','Nanum Gothic','돋움',dotum,sans-serif;}
+*/
+input{ margin:0; padding:0; height:18px; font-size:14px; line-height:120%; }
+ul, ol, li{list-style:none;}
+address,cite,em,var{font-style:normal;}
+label{cursor:pointer; vertical-align:0; line-height:25px;}
+hr{display:none; }
+img{ vertical-align:middle; border:0;}
+strong{ vertical-align:0; }
+iframe	{vertical-align:0; }
+/* Link Style */
+a:link,a:visited,a:active {text-decoration:none; color:#000;}
+a:hover	{ text-decoration:underline; color:#de690a;}
+
+/* Table Style */
+table  { border-collapse:collapse; border-collapse: separate; border-spacing:0; }
+table td img { vertical-align:0;}
+table.list_bar td img { vertical-align:middle;}
+table td.price img { vertical-align:middle; float:none}
+table td.price02 img { vertical-align:middle; float:none}
+legend,caption{position:absolute; height:0; font-size:0px; line-height:0; overflow:hidden; text-indent:-20000px; }
+fieldset{border:0; padding:0; width:100%; /* display:inline-block; !!이거 넣어서 조회 버튼 위치가 틀어졌는데 이거 빼면 안될까여?*/ }
+
+a {color:#de690a; text-decoration:none;cursor:pointer; vertical-align:0;}
+a:hover {color:#de690a;text-decoration:underline;}
+td a {color:#de690a; }
+td a:hover {color:#de690a; text-decoration:underline;}
+td a.Orgbtn:hover {text-decoration:none;}
+td a.pbtnBold:hover {text-decoration:none;}
+
+button::-moz-focus-inner {margin:-1px; padding:0; }
+button{overflow:visible;margin:0;padding:0;border:0;background:transparent;cursor:pointer;vertical-align:0;}
+table button{vertical-align:0;}
+button:hover {text-decoration:underline}
+button:hover span{text-decoration:none}
+button span {white-space:nowrap;  }
+
+/*input */
+select {height:25px;line-height:15px; font-size:14px; border:1px solid #bbb; vertical-align:0;}
+
+input[type="text"],
+input[type="password"]		{border:1px solid #bbb; height:23px; color:#666; line-height:16px; font-size:14px; padding:0 0 0 10px;  background-color:#fff; vertical-align:0;}
+.ie8 input[type="text"],
+.ie8 input[type="password"]		{height:18px;  padding:5px 0 0 10px; }
+input[type="file"]			{border:1px solid #bbb; height:23px; color:#000; line-height:16px; font-size:14px; padding:0 ;  background-color:#fff; vertical-align:0;}
+input[type="text"]:hover,
+input[type="text"]:focus,
+input[type="password"]:hover,
+input[type="password"]:focus,
+input[type="text"].focus	{border:1px solid #de690a; color:#000;}
+input[type="radio"],
+input[type="checkbox"]		{height:25px;vertical-align:middle; }
+input[type="password"]		{}
+
+input[type="text"].size_M,
+input[type="password"].size_M			{height:33px; }
+input[type="text"].size_L,
+input[type="password"].size_L			{height:40px;}
+
+input.disborder:hover,input.disborder:focus {border:1px solid #bbb; outline:none;}
+
+.inputGroup  label  +  label,
+.inputGroup  label  +  input	{margin-left:20px;}
+.labelGroup  label ~ label	{margin-left:20px;}
+
+input[type="text"].search:hover,input[type="text"].search:focus,input[type="text"].search.focus {border:none; outline:none;}
+
+input[type="text"].readonly,
+input[type="text"]:disabled, input[type="text"].disabled,
+input[type="password"]:disabled, input[type="password"].disabled,
+input[type="password"].readonly,
+input[type="password"][disabled],
+input[type="text"][disabled] {background:#e6e6e6; }
+
+input.bd0 {border:none;}
+.readonly.shrt {width:50px;}
+
+.clear {clear:both;line-height:0;font-size:0; width:100%; height:0px; overflow:hidden; }
+.hidden {visibility:hidden;position:absolute; width:2px; height:2px; overflow:hidden; left:-10000px;}
+.web_hidden {visibility:hidden;position:absolute; height:2px; width:2px; overflow:hidden; left:-10000px;}
+
+/* skip navi */
+a.accessibility01{position:absolute; display:block; width:100%; left:0; text-align:center; top:-10000px; z-index:500; font-size:1.3em}
+a.accessibility01:hover, a.accessibility01:focus, a.accessibility01:active{position:absolute; top:0; padding:15px 0; font-weight:bold; color:#fff; background:#1d60a7; z-index:500}
+.accessibility02 {position:absolute; top:0; display:block; left:0; width:199px; z-index:1}
+.accessibility02 a {display:block; height:19px; text-indent:-5000px; overflow:hidden; background:url(/img/common/banner/accessibility02.png) no-repeat}
+
+.clearfix:after {content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;}
+.clearfix {/*display:inline-block;*/ #zoom:1;  }
+ html[xmlns] .clearfix {display:block;}
+ * html .clearfix {height:1%;}
+.pchidden							{ width:0; height:0; visibility:hidden; color:#fff; overflow:hidden; display:none !important;  }
+
+.pointColor			{color:#de690a !important;}
+.pointColor_blue	{color:#1976d2 !important;}
+.pointColor_gray	{color:#666 !important;}
+
+.f_l,.fl			{float:left; }
+.f_r,.fr			{float:right; }
+table tr td.tal {text-align:left;}
+table tr th.tal {text-align:left;}
+.tac {text-align:center;}
+.fl {float:left; }
+.fr {float:right; }
+
+.inline			{display:inline; vertical-align:0; }
+.fbold,.bold,.clr_r01  {font-weight:bold;}
+hr.solid {display:block; height:1px; margin:10px 0; border:none;background:#d8d8d8; }
+
+@media print {
+.noprint {display:none; }
+}
+
