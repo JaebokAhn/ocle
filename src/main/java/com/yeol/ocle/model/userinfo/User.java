@@ -1,4 +1,4 @@
-package com.yeol.ocle.model;
+package com.yeol.ocle.model.userinfo;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;

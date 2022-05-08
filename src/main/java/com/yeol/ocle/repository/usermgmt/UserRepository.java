@@ -1,6 +1,6 @@
 package com.yeol.ocle.repository.usermgmt;
 
-import com.yeol.ocle.model.User;
+import com.yeol.ocle.model.userinfo.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // CRUD 함수를 JpaRepository가 들고 있음.

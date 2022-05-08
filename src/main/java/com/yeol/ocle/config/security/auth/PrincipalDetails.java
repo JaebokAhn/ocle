@@ -1,9 +1,9 @@
-package com.yeol.ocle.config.auth;
+package com.yeol.ocle.config.security.auth;
 
 //
 //
 
-import com.yeol.ocle.model.User;
+import com.yeol.ocle.model.userinfo.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

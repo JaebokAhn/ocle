@@ -32,17 +32,18 @@ public class MainController {
         return "admin";
     }
 
-    @Secured(OcleConst.MEMB_ROLE_DVSN_CODE_ADMR)
-    @GetMapping("info")
-    public @ResponseBody
-    String info() {
-        return "개인정보";
-    }
-
-    @PreAuthorize("hasRole('ROLE_SUPPLIER') or hasRole('ROLE_ADMIN')")
-    @GetMapping("data")
-    public @ResponseBody
-    String date() {
-        return "데이터";
-    }
+    /** Example of @Secured*/
+//    @Secured(OcleConst.MEMB_ROLE_DVSN_CODE_ADMR)
+//    @GetMapping("info")
+//    public @ResponseBody
+//    String info() {
+//        return "개인정보";
+//    }
+    /** Example of @PreAuthorize */
+//    @PreAuthorize("hasRole('ROLE_SUPPLIER') or hasRole('ROLE_ADMIN')")
+//    @GetMapping("data")
+//    public @ResponseBody
+//    String date() {
+//        return "데이터";
+//    }
 }

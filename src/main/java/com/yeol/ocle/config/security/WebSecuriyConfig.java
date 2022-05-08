@@ -1,4 +1,4 @@
-package com.yeol.ocle.config;
+package com.yeol.ocle.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

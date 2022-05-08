@@ -1,6 +1,6 @@
-package com.yeol.ocle.config.auth;
+package com.yeol.ocle.config.security.auth;
 
-import com.yeol.ocle.model.User;
+import com.yeol.ocle.model.userinfo.User;
 import com.yeol.ocle.repository.usermgmt.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

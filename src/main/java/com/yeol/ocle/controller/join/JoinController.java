@@ -1,7 +1,7 @@
 package com.yeol.ocle.controller.join;
 
 import com.yeol.ocle.comn.consts.OcleConst;
-import com.yeol.ocle.model.User;
+import com.yeol.ocle.model.userinfo.User;
 import com.yeol.ocle.repository.usermgmt.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
