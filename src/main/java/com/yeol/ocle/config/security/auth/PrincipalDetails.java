@@ -4,6 +4,7 @@ package com.yeol.ocle.config.security.auth;
 //
 
 import com.yeol.ocle.model.userinfo.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -20,6 +21,8 @@ import java.util.Collection;
  *
  * Security Session => Authentication => UserDetails
  */
+
+@Slf4j
 public class PrincipalDetails implements UserDetails {
 
     private User user;  //콤포지션

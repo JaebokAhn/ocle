@@ -1,23 +1,38 @@
 package com.yeol.ocle.model.userinfo;
 
+import com.yeol.ocle.model.comn.CommonEntity;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.sql.Timestamp;
+import javax.persistence.*;
 
+@Getter
+@Setter
+@ToString
 @Entity
-@Data
-public class User {
-    @Id //primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String username;
-    private String password;
-    private String role;    //CNSM, SPLR, ADMR
-    @CreationTimestamp
-    private Timestamp createDate;
+@Table(name = "user")
+public class User extends CommonEntity {
+    @Id
+    @Column(length = 100, columnDefinition = "varchar(100) not null comment '사용자ID'")
+    private String username;    //사용자ID
+
+    @NotNull
+    @Column(length = 500, columnDefinition = "varchar(500) not null comment '비밀번호'")
+    private String password;    //비밀번호
+
+    @NotNull
+    @Column(length = 20, columnDefinition = "varchar(20) default 'ROLE_CONSUMER' not null comment '사용자역할코드 ROLE_CONSUMER, ROLE_SUPPLIER, ROLE_ADMIN'")
+    private String role;    //ROLE_CONSUMER, ROLE_SUPPLIER, ROLE_ADMIN
+
+    @Column(name="cust_nm", length = 100, columnDefinition = "varchar(100) comment '고객명'")
+    private String custNm;
+
+    @Column(name="join_mthd_dvsn_code", length = 1, columnDefinition = "varchar(1) default '1' not null comment '가입방법구분코드'")
+    private String joinMthdDvsnCode;
+
+    @Column(name="user_atrt_grad_code", length = 1, columnDefinition = "varchar(3) default '001' not null comment '사용자권한등급코드'")
+    private String userAtrtGradCode;
 }

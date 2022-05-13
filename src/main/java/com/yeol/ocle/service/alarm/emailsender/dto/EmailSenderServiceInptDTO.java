@@ -1,11 +1,10 @@
 package com.yeol.ocle.service.alarm.emailsender.dto;
 
-import com.yeol.ocle.service.cmdto.ComnServiceInptDTO;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.Data;
 
 @Data
-public class EmailSenderServiceInptDTO extends ComnServiceInptDTO {
+public class EmailSenderServiceInptDTO {
     @NotNull
     private String toEmail; //수신자
 

@@ -15,9 +15,18 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <form method="POST">
-        <input type="text" name="username" placeholder="이메일 주소" /><br />
-        <input type="password" name="password" placeholder="비밀번호" /><br />
+    <form th:action="@{/main/join/join}" th:object="${joinInpt}" method="POST">
+        <input type="text" name="username" placeholder="이메일 주소" th:field="*{username}"/><br />
+        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="in-valid">username has Error</div>
+        <input type="password" name="password" placeholder="비밀번호" th:field="*{password}"/><br />
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="in-valid">password has Error</div>
+        <input type="password" name="passwordCnfm" placeholder="비밀번호 확인" th:field="*{passwordCnfm}"/><br />
+        <div th:if="${#fields.hasErrors('passwordCnfm')}" th:errors="*{passwordCnfm}" class="in-valid">passwordCnfm has Error</div>
+        <input type="text" name="custNm" placeholder="고객명" th:field="*{custNm}"/><br />
+        <div th:if="${#fields.hasErrors('custNm')}" th:errors="*{custNm}" class="in-valid">custNm has Error</div>
+        <div th:text="${comnMsge}">
+
+        </div>
         <button type="submit">회원가입</button>
     </form>
 </div>
