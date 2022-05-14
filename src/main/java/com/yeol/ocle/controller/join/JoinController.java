@@ -93,7 +93,8 @@ public class JoinController {
 
                 //처리결과 오류 인경우
                 if(comnMsge == null || OcleConst.PRCS_RSLT_CODE_E.equals(comnMsge.getPrcsRsltCode())) {
-                    model.addAttribute("comnMsge", comnMsge);
+                    model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_E);
+                    model.addAttribute("msgeCntn", comnMsge.getMsgeCntn());
                     return this.getViewName("joinForm");
                 }
             }

@@ -1,12 +1,13 @@
 package com.yeol.ocle.controller.join.join.modelattr;
 
+import com.yeol.ocle.comn.cmdto.ComnMsgeDTO;
 import lombok.Data;
 
 import javax.validation.constraints.Size;
 
 @Data
 public class JoinInptDTO {
-    @Size(min=10, max=40)
+    @Size(min=5, max=100)
     private String username;    //사용자ID
     
     private String password;    //비밀번호

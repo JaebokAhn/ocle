@@ -38,10 +38,10 @@ public class JoinInptValidator implements Validator {
             errors.rejectValue("passwordCnfm", "key", "비밀번호확인을 입력하세요.");
         }
 
-        //비밀번호 길이 체크
-        if(password.length() < 8) {
-            errors.rejectValue("password", "key", "비밀번호를 8자 이상으로 입력해주세요.");
-        }
+        //비밀번호 길이 체크 [TODO] 비밀번호 길이체크 임시 주석
+//        if(password.length() < 8) {
+//            errors.rejectValue("password", "key", "비밀번호를 8자 이상으로 입력해주세요.");
+//        }
 
         if(password.length() > 20) {
             errors.rejectValue("password", "key", "비밀번호를 20자 이하로 입력해주세요.");
@@ -56,5 +56,7 @@ public class JoinInptValidator implements Validator {
         if(StringUtils.isEmpty(custNm)) {
             errors.rejectValue("custNm", "key", "고객명을 입력하세요.");
         }
+        
+        //[TODO] 비밀번호 생성 규칙 설정
     }
 }

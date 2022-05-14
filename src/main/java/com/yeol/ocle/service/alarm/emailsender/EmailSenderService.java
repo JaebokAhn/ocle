@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Properties;
 
+/**
+ * 이메일 발송 서비스
+ */
+
 @Slf4j  //lombok logger
 @Service
 public class EmailSenderService {
