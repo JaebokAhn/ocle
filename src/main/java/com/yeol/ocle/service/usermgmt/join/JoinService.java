@@ -2,6 +2,8 @@ package com.yeol.ocle.service.usermgmt.join;
 
 import com.yeol.ocle.comn.cmdto.ComnMsgeDTO;
 import com.yeol.ocle.comn.consts.OcleConst;
+import com.yeol.ocle.comn.exception.BizOcleException;
+import com.yeol.ocle.comn.exception.OcleException;
 import com.yeol.ocle.comn.utils.OcleUtils;
 import com.yeol.ocle.model.userinfo.User;
 import com.yeol.ocle.repository.usermgmt.UserRepository;
@@ -49,15 +51,8 @@ public class JoinService {
         User isJoinUser = userRepository.findByUsernameAndDltnYn(username, OcleConst.GENERAL_N);
 
         if(isJoinUser != null) {
-            log.info("이미 가입 된 아이디 입니다. [" + username + "]");
-
-            joinServiceRslt = new JoinServiceRsltDTO();
-            ComnMsgeDTO comnMsge = new ComnMsgeDTO();
-
-            comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_E);   //처리결과코드
-            comnMsge.setMsgeCntn("이미 가입 된 아이디 입니다.");
-            joinServiceRslt.setComnMsge(comnMsge);
-            return joinServiceRslt;
+            /* 이미 가입 된 아이디 입니다.*/
+            throw new BizOcleException("COME0002");
         }
 
         User user = new User();

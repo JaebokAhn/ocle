@@ -2,6 +2,8 @@ package com.yeol.ocle.controller.join;
 
 import com.yeol.ocle.comn.cmdto.ComnMsgeDTO;
 import com.yeol.ocle.comn.consts.OcleConst;
+import com.yeol.ocle.comn.exception.BizOcleException;
+import com.yeol.ocle.comn.message.MessageService;
 import com.yeol.ocle.controller.join.join.modelattr.JoinInptDTO;
 import com.yeol.ocle.controller.join.join.validator.JoinInptValidator;
 import com.yeol.ocle.service.usermgmt.join.JoinService;
@@ -30,6 +32,11 @@ public class JoinController {
         return preFix + pageName + postFix;
     }
 
+    /**
+     * 메시지서비스
+     */
+    @Autowired
+    private MessageService messageService;
 
     /**
      * 회원가입 입력값 검증
@@ -99,8 +106,16 @@ public class JoinController {
                 }
             }
 
+        } catch (BizOcleException e) {
+            model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_E);
+            model.addAttribute("msgeCode", e.getMessageId());
+            model.addAttribute("msgeCntn", messageService.getMessage(e.getMessageId(), e.getArguments()));
+            return this.getViewName("joinForm");
         } catch (Exception e) {
-
+            model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_E);
+            model.addAttribute("msgeCode", OcleConst.MSGE_CODE_SYSE0001);
+            model.addAttribute("msgeCntn", messageService.getMessage(OcleConst.MSGE_CODE_SYSE0001));
+            return this.getViewName("joinForm");
         }
 
         return "redirect:/main/login/login";

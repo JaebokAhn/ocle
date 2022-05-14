@@ -43,4 +43,7 @@ public class OcleConst {
 
     /** 처리결과코드 : E (오류) */
     public static final String PRCS_RSLT_CODE_E = "E";
+
+    /** 메시지코드 : SYSE0001 (시스템오류) */
+    public static final String MSGE_CODE_SYSE0001 = "SYSE0001";
 }

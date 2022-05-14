@@ -24,6 +24,7 @@
         <div th:if="${#fields.hasErrors('passwordCnfm')}" th:errors="*{passwordCnfm}" class="in-valid">passwordCnfm has Error</div>
         <input type="text" name="custNm" placeholder="고객명" th:field="*{custNm}"/><br />
         <div th:if="${#fields.hasErrors('custNm')}" th:errors="*{custNm}" class="in-valid">custNm has Error</div>
+        <div th:if="${prcsRsltCode} eq 'E'" th:text="${msgeCode}" class="in-valid"></div>
         <div th:if="${prcsRsltCode} eq 'E'" th:text="${msgeCntn}" class="in-valid"></div>
 
         <button type="submit">회원가입</button>
