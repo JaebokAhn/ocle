@@ -3,7 +3,6 @@ package com.yeol.ocle.service.usermgmt.join;
 import com.yeol.ocle.comn.cmdto.ComnMsgeDTO;
 import com.yeol.ocle.comn.consts.OcleConst;
 import com.yeol.ocle.comn.exception.BizOcleException;
-import com.yeol.ocle.comn.exception.OcleException;
 import com.yeol.ocle.comn.utils.OcleUtils;
 import com.yeol.ocle.model.userinfo.User;
 import com.yeol.ocle.repository.usermgmt.UserRepository;
