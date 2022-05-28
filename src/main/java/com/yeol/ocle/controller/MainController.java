@@ -33,7 +33,7 @@ public class MainController {
     }
 
     /** Example of @Secured*/
-//    @Secured(OcleConst.MEMB_ROLE_DVSN_CODE_ADMR)
+//    @Secured(OcleConst.USER_ROLE_DVSN_CODE_SPLR)
 //    @GetMapping("info")
 //    public @ResponseBody
 //    String info() {

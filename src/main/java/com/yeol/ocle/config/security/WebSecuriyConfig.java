@@ -23,8 +23,8 @@ public class WebSecuriyConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/consumer/**").authenticated()
-                .antMatchers("/supplier/**").access("hasRole('SPLR') or hasRole('ADMR')")
-                .antMatchers("/admin/**").access("hasRole('ADMR')")
+                .antMatchers("/supplier/**").access("hasRole('ROLE_SUPPLIER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
