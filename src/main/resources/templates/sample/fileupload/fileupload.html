@@ -17,11 +17,14 @@
 <body>
 <div layout:fragment="content">
     <h1>파일 업로드</h1> <hr>
-
-    <form th:action="@{/}" method="post" enctype="multipart/form-data">
-        제목 : <input type="text" name="title"> <br>
+    <form th:action="@{/sample/fileupload/fileupload}" method="post" enctype="multipart/form-data">
+        <!--제목 : <input type="text" name="title"> <br>-->
         파일 : <input type="file" name="file"> <br>
-        <button>등록하기</button>
+
+        <div th:unless="${#strings.isEmpty(fileUrl)}" th:text="${fileUrl}"></div>
+        <div th:if="${prcsRsltCode} eq 'E'" th:text="${msgeCode}" class="in-valid"></div>
+        <div th:if="${prcsRsltCode} eq 'E'" th:text="${msgeCntn}" class="in-valid"></div>
+        <button type="submit">등록하기</button>
     </form>
 </div>
 </body>

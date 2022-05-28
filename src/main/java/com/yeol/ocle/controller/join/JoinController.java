@@ -29,7 +29,7 @@ public class JoinController {
     private final String postFix = "";
 
     private final String getViewName(String pageName){
-        return preFix + pageName + postFix;
+        return this.preFix + pageName + this.postFix;
     }
 
     /**
