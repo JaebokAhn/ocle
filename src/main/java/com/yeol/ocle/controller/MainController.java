@@ -14,23 +14,23 @@ public class MainController {
         return "main/main";
     }
 
-    @GetMapping("consumer")
-    public @ResponseBody
-    String  consumer(){
-        return "consumer";
-    }
+//    @GetMapping("consumer")
+//    public @ResponseBody
+//    String  consumer(){
+//        return "consumer";
+//    }
 
-    @GetMapping("supplier")
-    public @ResponseBody
-    String  supplier(){
-        return "supplier";
-    }
+//    @GetMapping("supplier")
+//    public @ResponseBody
+//    String  supplier(){
+//        return "supplier";
+//    }
 
-    @GetMapping("admin")
-    public @ResponseBody
-    String  admin(){
-        return "admin";
-    }
+//    @GetMapping("admin")
+//    public @ResponseBody
+//    String  admin(){
+//        return "admin";
+//    }
 
     /** Example of @Secured*/
 //    @Secured(OcleConst.USER_ROLE_DVSN_CODE_SPLR)

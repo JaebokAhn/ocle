@@ -2,21 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/ocle-layout}"
+      layout:decorate="~{layout/ocle-layout-admin}"
 >
 <head>
-    <title>sample</title>
+    <title>공통 메시지 관리</title>
     <script th:inline="javascript">
         /*<![CDATA[*/
         jQuery(document).ready(function() {
-            alert([[${msgeCntn}]]);
+//            alert([[${msgeCntn}]]);
         });
         /*]]>*/
     </script>
 </head>
 <body>
 <div layout:fragment="content">
-    컨텐트 내용 작성
+    통합 메시지 관리
 </div>
 </body>
 </html>

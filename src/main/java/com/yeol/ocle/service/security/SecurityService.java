@@ -38,7 +38,7 @@ public class SecurityService {
     }
 
 
-    //토큰 검증 -> boolean으로 return 하도록 수정
+    //[TODO] 토큰 검증 -> boolean으로 return 하도록 수정
     public String getSubject(String token) {
         //claims : payload 정보
         Claims claims = Jwts.parserBuilder()

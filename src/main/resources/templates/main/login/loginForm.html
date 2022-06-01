@@ -18,6 +18,9 @@
     <form th:action="@{/main/login/loginPrcs}" method="POST">
         <input type="text" name="username" placeholder="이메일 주소" /><br />
         <input type="password" name="password" placeholder="비밀번호" /><br />
+        <div th:if="${param.error}" class="in-valid">
+            사용자 정보가 일치하지 않습니다.
+        </div>
         <button type="submit">로그인</button>
     </form>
     <a th:href="@{/main/join/join}">회원가입</a>

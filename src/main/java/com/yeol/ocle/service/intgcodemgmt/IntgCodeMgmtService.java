@@ -1,8 +1,8 @@
 package com.yeol.ocle.service.intgcodemgmt;
 
+import com.yeol.ocle.model.intgcode.IntgCode;
 import com.yeol.ocle.repository.intgcode.IntgCodeRepository;
 import com.yeol.ocle.repository.intgcode.IntgCodeValRepository;
-import com.yeol.ocle.service.intgcodemgmt.dto.IntgCodeDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class IntgCodeMgmtService {
      * @param intgCode
      * @return
      */
-    public int insertIntgCode(IntgCodeDTO intgCode) {
+    public int insertIntgCode(IntgCode intgCode) {
         int insertIntgCodeRslt = 0;
 
         return insertIntgCodeRslt;

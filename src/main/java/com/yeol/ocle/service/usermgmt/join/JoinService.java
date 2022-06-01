@@ -51,7 +51,7 @@ public class JoinService {
 
         if(isJoinUser != null) {
             /* 이미 가입 된 아이디 입니다.*/
-            throw new BizOcleException("COME0002");
+            throw new BizOcleException("COMN0002");
         }
 
         User user = new User();
