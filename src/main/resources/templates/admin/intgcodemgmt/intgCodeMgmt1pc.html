@@ -3,11 +3,11 @@
 >
 
 <tr th:if="${#lists.isEmpty(intgCodeValList)}">
-    <td colspan="3">조회 할 내용이 없습니다.</td>
+    <td colspan="3" class="text-center">조회 할 내용이 없습니다.</td>
 </tr>
 <tr th:if="${not #lists.isEmpty(intgCodeValList)}"
     th:each="intgCodeVal : ${intgCodeValList}">
-    <td th:text="${intgCodeVal.intgCodeVal}">통합코드값</td>
-    <td th:text="${intgCodeVal.intgCodeValNm}">통합코드값명</td>
+    <td class="text-center" th:text="${intgCodeVal.intgCodeVal}">통합코드값</td>
+    <td class="text-center" th:text="${intgCodeVal.intgCodeValNm}">통합코드값명</td>
     <td th:text="${intgCodeVal.intcCntn}">설명내용</td>
 </tr>
