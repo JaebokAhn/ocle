@@ -11,14 +11,14 @@
         jQuery(document).ready(function() {
 //            alert([[${msgeCntn}]]);
         });
-        /*]]>*/
+        
 
         function selectIntgCodeValList(intgCodeId) {
             var input = new DataSet();
             input.put("intgCodeId", intgCodeId);
 
             submitAjax(null, {
-                url: "/admin/intgCodeMgmt1pc",
+                url: "/admin/intgCodeMgmt1p_1tc",
                 data: input.getParam(),
                 async: true,
                 success:function(data) {
@@ -26,13 +26,17 @@
                 }
             });
         }
+
+        function saveIntgCode() {
+
+        }
+
+        /*]]>*/
     </script>
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="p-3">
-        <h4>통합코드조회</h4>
-    </div>
+    <h4 class="p-3">통합코드조회</h4>
     <form th:action="@{/admin/intgCodeMgmt1p}" th:object="${inqyInpt}" method="get">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text"><label for="intgCodeId">통합코드ID</label></span>
@@ -104,6 +108,21 @@
     <div>currPage : <span th:text="${pageNavInfo.currPage}"></span></div>
     <div>totalPage : <span th:text="${pageNavInfo.totalPage}"></span></div>
     -->
+    <h6 class="py-4 mt-4">통합코드추가</h6>
+    <form method="post">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text"><label>통합코드ID</label></span>
+            <input type="text" class="form-control">
+            <span class="input-group-text"><label>통합코드명</label></span>
+            <input type="text" class="form-control">
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text"><label>설명내용</label></span>
+            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <a class="btn btn-outline-secondary" type="button" href="#"
+               th:onclick="saveIntgCode(); return false;">추가</a>
+        </div>
+    </form>
 
     <!-- STR : INTG CODE DETAIL-->
     <div class="mt-5">

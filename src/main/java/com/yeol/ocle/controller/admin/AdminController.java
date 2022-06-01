@@ -5,10 +5,9 @@ import com.yeol.ocle.comn.consts.OcleConst;
 import com.yeol.ocle.comn.exception.BizOcleException;
 import com.yeol.ocle.comn.message.MessageService;
 import com.yeol.ocle.comn.utils.OcleUtils;
-import com.yeol.ocle.model.intgcode.IntgCodeVal;
+import com.yeol.ocle.controller.admin.modelattr.IntgCodeDTO;
 import com.yeol.ocle.repository.intgcode.IntgCodeValRepository;
 import com.yeol.ocle.service.intgcodemgmt.IntgCodeMgmtService;
-import com.yeol.ocle.service.intgcodemgmt.dto.IntgCodeListInqyInptDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,8 +17,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -51,6 +48,8 @@ public class AdminController {
     @Autowired
     private IntgCodeValRepository intgCodeValRepository;
 
+
+
     /**
      * 관리자 메인 화면
      * @return
@@ -69,19 +68,16 @@ public class AdminController {
     @GetMapping("/intgCodeMgmt1p")
     public String intgCodeMgmt1p(
             Model model,
-            @ModelAttribute("inqyInpt") IntgCodeListInqyInptDTO inqyInpt,
+            @ModelAttribute("inqyInpt") IntgCodeDTO inqyInpt,
             @PageableDefault(page = 0, size = 10, sort = "intgCodeId", direction = Sort.Direction.ASC) Pageable pageable) {
 
         try {
             log.info("AdminController.intgCodeMgmt1pc START");
 
+
             if(inqyInpt == null) {
-                inqyInpt = new IntgCodeListInqyInptDTO();
+                inqyInpt = new IntgCodeDTO();
             }
-            String intgCodeId = OcleUtils.nvlToString(inqyInpt.getIntgCodeId(), "");
-            String intgCodeNm = OcleUtils.nvlToString(inqyInpt.getIntgCodeNm(), "");
-            inqyInpt.setIntgCodeId(intgCodeId);
-            inqyInpt.setIntgCodeNm(intgCodeNm);
 
             Page<Object> intgCodeList = intgCodeMgmtService.selectIntgCodeList(inqyInpt, pageable);
 
@@ -109,8 +105,14 @@ public class AdminController {
         return this.getViewName("intgcodemgmt/intgCodeMgmt1p");
     }
 
-    @PostMapping("/intgCodeMgmt1pc")
-    public String intgCodeMgmt1pc(
+    /**
+     * 통합코드값목록 조회
+     * @param model
+     * @param intgCodeId
+     * @return
+     */
+    @PostMapping("/intgCodeMgmt1p_1tc")
+    public String intgCodeMgmt1p_1tc(
             Model model,
             @RequestParam(value = "intgCodeId") String intgCodeId
     ) {
@@ -120,7 +122,7 @@ public class AdminController {
         List<Object> intgCodeValList = intgCodeValRepository.findByIntgCodeId(intgCodeId);
         
         model.addAttribute("intgCodeValList", intgCodeValList);
-        return this.getViewName("intgcodemgmt/intgCodeMgmt1pc");
+        return this.getViewName("intgcodemgmt/intgCodeMgmt1p_1tc");
     }
 
     /**
