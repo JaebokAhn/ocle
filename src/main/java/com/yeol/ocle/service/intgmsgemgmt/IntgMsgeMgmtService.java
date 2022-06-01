@@ -29,7 +29,7 @@ public class IntgMsgeMgmtService {
     /**
      * 통합메시지목록조회
      *
-     * @return List<IntgMsge> intgMsgeList
+     * @return Page<IntgMsge> intgMsgeList
      */
     public Page<IntgMsge> selectIntgMsgeList(IntgMsgeListInqyInptDTO intgMsgeListInqyInpt, Pageable pageable) {
         log.info("IntgMsgeMgmtService.selectIntgMsgeList START");

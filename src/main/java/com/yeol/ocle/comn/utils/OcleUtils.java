@@ -1,5 +1,8 @@
 package com.yeol.ocle.comn.utils;
 
+import com.yeol.ocle.comn.cmdto.PageNavInfoDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.thymeleaf.util.StringUtils;
 
 /**
@@ -43,5 +46,26 @@ public final class OcleUtils {
             }
         }
         return flag;
+    }
+
+    /**
+     * 페이징처리를 위해 시작페이지, 종료페이지를 구한다.
+     * @param object
+     * @return
+     */
+    public static PageNavInfoDTO getPageNavInfo(Page<Object> object) {
+        Pageable pageable = object.getPageable();
+
+        int startPage = Math.max(1, pageable.getPageNumber() - 4);
+        int endPage = Math.min(object.getTotalPages(), pageable.getPageNumber() + 4);
+        int currPage = pageable.getPageNumber();
+
+        //page번호는 0부터 시작함.
+        PageNavInfoDTO pageNavInfo = new PageNavInfoDTO();
+        pageNavInfo.setStartPage(startPage);    //시작페이지번호
+        pageNavInfo.setEndPage(endPage);    //종료페이지번호
+        pageNavInfo.setCurrPage(currPage);  //현재페이지번호
+        pageNavInfo.setTotalPage(object.getTotalPages());   //총페이지수
+        return pageNavInfo;
     }
 }
