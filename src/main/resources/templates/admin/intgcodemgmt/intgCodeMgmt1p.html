@@ -12,11 +12,25 @@
 //            alert([[${msgeCntn}]]);
         });
         /*]]>*/
+
+        function selectIntgCodeValList(intgCodeId) {
+            var input = new DataSet();
+            input.put("intgCodeId", intgCodeId);
+
+            submitAjax(null, {
+                url: "/admin/intgCodeMgmt1pc",
+                data: input.getParam(),
+                async: true,
+                success:function(data) {
+                    jQuery("#tblIntgCodeVal > tbody").html(data);
+                }
+            });
+        }
     </script>
 </head>
 <body>
 <div layout:fragment="content">
-    <div>
+    <div class="p-3">
         <h4>통합코드조회</h4>
     </div>
     <form th:action="@{/admin/intgCodeMgmt1p}" th:object="${inqyInpt}" method="get">
@@ -44,11 +58,11 @@
         </thead>
         <tbody>
         <tr th:if="${#lists.isEmpty(intgCodeList.content)}">
-            <td colspan="4">조회 할 내용이 없습니다.</td>
+            <td colspan="3">조회 할 내용이 없습니다.</td>
         </tr>
         <tr th:if="${not #lists.isEmpty(intgCodeList.content)}"
             th:each="intgCode : ${intgCodeList.content}">
-            <td th:text="${intgCode.intgCodeId}">통합코드ID</td>
+            <td><a th:text="${intgCode.intgCodeId}" href="#" th:onclick="selectIntgCodeValList([[${intgCode.intgCodeId}]]); return false;">통합코드ID</a></td>
             <td th:text="${intgCode.intgCodeNm}">통합코드명</td>
             <td th:text="${intgCode.intcCntn}">설명내용</td>
         </tr>
@@ -89,22 +103,44 @@
     -->
 
     <!-- STR : INTG CODE DETAIL-->
-    <!--<div>
+    <div class="mt-5">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Active</a>
+                <a class="nav-link active" aria-current="page" href="#">유효값</a>
             </li>
+            <!--
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="#"></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled">Disabled</a>
-            </li>
+            </li>-->
         </ul>
-    </div>-->
+        <div class="tab_content py-3" style="min-height: 300px;">
+            <table class="table table-dark table-striped" id="tblIntgCodeVal">
+                <colgroup>
+                    <col width="20%"/>
+                    <col width="20%"/>
+                    <col width="*"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th scope="col">통합코드값</th>
+                    <th scope="col">통합코드값명</th>
+                    <th scope="col">설명내용</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="3">통합코드ID를 선택하세요.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>

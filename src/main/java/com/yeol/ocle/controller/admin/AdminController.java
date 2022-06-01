@@ -5,6 +5,8 @@ import com.yeol.ocle.comn.consts.OcleConst;
 import com.yeol.ocle.comn.exception.BizOcleException;
 import com.yeol.ocle.comn.message.MessageService;
 import com.yeol.ocle.comn.utils.OcleUtils;
+import com.yeol.ocle.model.intgcode.IntgCodeVal;
+import com.yeol.ocle.repository.intgcode.IntgCodeValRepository;
 import com.yeol.ocle.service.intgcodemgmt.IntgCodeMgmtService;
 import com.yeol.ocle.service.intgcodemgmt.dto.IntgCodeListInqyInptDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -39,6 +44,12 @@ public class AdminController {
      */
     @Autowired
     private IntgCodeMgmtService intgCodeMgmtService;
+
+    /**
+     * 공통코드값 Repository
+     */
+    @Autowired
+    private IntgCodeValRepository intgCodeValRepository;
 
     /**
      * 관리자 메인 화면
@@ -96,6 +107,20 @@ public class AdminController {
         }
 
         return this.getViewName("intgcodemgmt/intgCodeMgmt1p");
+    }
+
+    @PostMapping("/intgCodeMgmt1pc")
+    public String intgCodeMgmt1pc(
+            Model model,
+            @RequestParam(value = "intgCodeId") String intgCodeId
+    ) {
+        log.info("intgCodeId : {} ", intgCodeId);
+        
+        //통합코드값 목록
+        List<Object> intgCodeValList = intgCodeValRepository.findByIntgCodeId(intgCodeId);
+        
+        model.addAttribute("intgCodeValList", intgCodeValList);
+        return this.getViewName("intgcodemgmt/intgCodeMgmt1pc");
     }
 
     /**

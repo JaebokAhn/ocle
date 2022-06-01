@@ -47,8 +47,8 @@
                     </li>-->
                 </ul>
                 <form class="d-flex" role="search">
-                    <span sec:authentication="name">사용자</span>
-                    <a th:href="@{/logout}">로그아웃</a>
+                    <span sec:authentication="name" class="px-2">사용자</span>
+                    <a th:href="@{/logout}" class="btn btn-outline-secondary btn-sm">로그아웃</a>
                 </form>
             </div>
         </div>
