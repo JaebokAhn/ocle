@@ -22,7 +22,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/admin/comnmgmt/")
+@RequestMapping("/admin/comnmgmt")
 public class ComnMgmtController {
     private final String preFix = "/admin/comnmgmt/";
     private final String postFix = "";
@@ -55,7 +55,7 @@ public class ComnMgmtController {
      * @param model
      * @return
      */
-    @GetMapping("IntgCodeMgmtM")
+    @GetMapping("/IntgCodeMgmtM")
     public String IntgCodeMgmtM (
             Model model,
             @ModelAttribute("inqyInpt") IntgCodeDTO inqyInpt,
@@ -101,7 +101,7 @@ public class ComnMgmtController {
      * @param intgCodeId
      * @return
      */
-    @PostMapping("IntgCodeMgmtT01")
+    @PostMapping("/IntgCodeMgmtT01")
     public String IntgCodeMgmtT01(
             Model model,
             @RequestParam(value = "intgCodeId") String intgCodeId
@@ -120,7 +120,7 @@ public class ComnMgmtController {
      * @param model
      * @return
      */
-    @GetMapping("IntgMsgeMgmtM")
+    @GetMapping("/IntgMsgeMgmtM")
     public String IntgMsgeMgmtM(Model model) {
 
         return this.getViewName("IntgMsgeMgmtM");
