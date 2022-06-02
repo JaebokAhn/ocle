@@ -16,23 +16,23 @@ function submitAjax(formObj, settings) {
 
     var ajaxOption;
     if(formObj !== null && formObj !== undefined){
-        formObj = jQuery(formObj);
+        formObj = $(formObj);
         ajaxOption = {
             url :formObj.attr("action"),
             data: settings.data ? settings.data : formObj.serialize()
         };
-        if (settings){jQuery.extend(ajaxOption, settings);}
-        jQuery.extend(ajaxOption, defaultOption);
+        if (settings){$.extend(ajaxOption, settings);}
+        $.extend(ajaxOption, defaultOption);
     }else{
         ajaxOption = {
             url:settings.url,
             data:cm_escapeParam(settings.data)
         };
-        if (settings){jQuery.extend(ajaxOption, settings);}
-        jQuery.extend(ajaxOption, defaultOption);
+        if (settings){$.extend(ajaxOption, settings);}
+        $.extend(ajaxOption, defaultOption);
     }
 
-    jQuery.ajax(ajaxOption);
+    $.ajax(ajaxOption);
 	return false;
 }
 
