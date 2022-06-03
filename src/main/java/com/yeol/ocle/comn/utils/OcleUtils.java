@@ -1,9 +1,16 @@
 package com.yeol.ocle.comn.utils;
 
+import com.yeol.ocle.comn.cmdto.ComnMsgeDTO;
 import com.yeol.ocle.comn.cmdto.PageNavInfoDTO;
+import com.yeol.ocle.comn.consts.OcleConst;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.thymeleaf.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 오클 Utils
@@ -67,5 +74,48 @@ public final class OcleUtils {
         pageNavInfo.setCurrPage(currPage);  //현재페이지번호
         pageNavInfo.setTotalPage(object.getTotalPages());   //총페이지수
         return pageNavInfo;
+    }
+
+    /**
+     * Controller의 input parameter validation 후 결과(BindingResult)를
+     * 공통메시지DTO (ComnMsgeDTO) type으로 변환해준다.
+     *
+     * @param bindingResult
+     * @return
+     */
+    public static ComnMsgeDTO convertBindingResultToComnMsge (BindingResult bindingResult) {
+        ComnMsgeDTO comnMsge = new ComnMsgeDTO();
+
+        if(!bindingResult.hasErrors()) {
+            //처리결과코드 : O (정상)
+            comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_O);
+            comnMsge.setMsgeCntn("정상적으로 처리되었습니다.");
+            return comnMsge;
+        }
+
+        FieldError firstError = (FieldError) bindingResult.getAllErrors().get(0);
+
+        //처리결과코드 : E (오류)
+        comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_E);
+        comnMsge.setMsgeCode(firstError.getCode());  //메시지코드
+        comnMsge.setMsgeCntn(firstError.getDefaultMessage());    //메시지내용
+
+        //BindingResult 결과 처리용 필드 목록
+        List<String> fieldList = new ArrayList<>();
+
+        //BindingResult 결과 처리용 메시지 목록
+        List<String> msgeList = new ArrayList<>();
+
+        bindingResult.getAllErrors().forEach(error -> {
+            FieldError fieldError = (FieldError) error;
+
+            fieldList.add(fieldError.getField());
+            msgeList.add(fieldError.getDefaultMessage());
+        });
+
+        comnMsge.setFieldList(fieldList);
+        comnMsge.setMsgeList(msgeList);
+
+        return comnMsge;
     }
 }

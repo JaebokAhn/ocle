@@ -40,6 +40,7 @@
          */
         function saveIntgCode() {
             var input = $("#saveIntgCodeForm").serializeObject();
+            input.jobDvsnCode = "C";
 
             submitAjax({
                 url: "/api/admin/intgcode/IntnCodeMgmtAPI001c",

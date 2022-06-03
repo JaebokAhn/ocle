@@ -46,4 +46,16 @@ public class OcleConst {
 
     /** 메시지코드 : SYSE0001 (시스템오류) */
     public static final String MSGE_CODE_SYSE0001 = "SYSE0001";
+    
+    /** 작업구분코드 : C (생성) */
+    public static final String JOB_DVSN_CODE_C = "C";
+
+    /** 작업구분코드 : R (조회) */
+    public static final String JOB_DVSN_CODE_R = "R";
+
+    /** 작업구분코드 : U (수정) */
+    public static final String JOB_DVSN_CODE_U = "U";
+
+    /** 작업구분코드 : D (삭제) */
+    public static final String JOB_DVSN_CODE_D = "D";
 }
