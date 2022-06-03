@@ -114,7 +114,7 @@ public class ComnMgmtController {
         List<Object> intgCodeValList = intgCodeValRepository.findByIntgCodeId(intgCodeId);
 
         model.addAttribute("intgCodeValList", intgCodeValList);
-        return this.getViewName("IntgCodeMgmtT01");
+        return this.getViewName("IntgCodeMgmtM :: #intgCodeMgmtT01");
     }
 
     /**
