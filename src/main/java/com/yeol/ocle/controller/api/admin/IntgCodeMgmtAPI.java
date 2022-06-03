@@ -1,7 +1,7 @@
 package com.yeol.ocle.controller.api.admin;
 
 import com.yeol.ocle.controller.GenericApiController;
-import com.yeol.ocle.controller.admin.modelattr.IntgCodeDTO;
+import com.yeol.ocle.controller.admin.dto.IntgCodeDTO;
 import com.yeol.ocle.model.intgcode.IntgCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

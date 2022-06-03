@@ -1,4 +1,4 @@
-package com.yeol.ocle.controller.admin.modelattr;
+package com.yeol.ocle.controller.admin.dto;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.yeol.ocle.controller.join.join.validator;
 
-import com.yeol.ocle.controller.join.join.modelattr.JoinInptDTO;
+import com.yeol.ocle.controller.join.join.dto.JoinInptDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

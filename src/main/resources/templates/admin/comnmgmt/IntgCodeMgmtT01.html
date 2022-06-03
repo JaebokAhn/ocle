@@ -4,10 +4,12 @@
     <colgroup>
         <col width="20%"/>
         <col width="20%"/>
+        <col width="20%"/>
         <col width="*"/>
     </colgroup>
     <thead>
     <tr>
+        <th scope="col" class="text-center">통합코드ID</th>
         <th scope="col" class="text-center">통합코드값</th>
         <th scope="col" class="text-center">통합코드값명</th>
         <th scope="col" class="text-center">설명내용</th>
@@ -19,6 +21,7 @@
         </tr>
         <tr th:if="${not #lists.isEmpty(intgCodeValList)}"
             th:each="intgCodeVal : ${intgCodeValList}">
+            <td class="text-center" th:text="${intgCodeVal.intgCodeId}">통합코드ID</td>
             <td class="text-center" th:text="${intgCodeVal.intgCodeVal}">통합코드값</td>
             <td class="text-center" th:text="${intgCodeVal.intgCodeValNm}">통합코드값명</td>
             <td th:text="${intgCodeVal.intcCntn}">설명내용</td>

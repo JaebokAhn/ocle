@@ -4,7 +4,7 @@ import com.yeol.ocle.comn.cmdto.ComnMsgeDTO;
 import com.yeol.ocle.comn.consts.OcleConst;
 import com.yeol.ocle.comn.exception.BizOcleException;
 import com.yeol.ocle.comn.message.MessageService;
-import com.yeol.ocle.controller.join.join.modelattr.JoinInptDTO;
+import com.yeol.ocle.controller.join.join.dto.JoinInptDTO;
 import com.yeol.ocle.controller.join.join.validator.JoinInptValidator;
 import com.yeol.ocle.service.usermgmt.join.JoinService;
 import com.yeol.ocle.service.usermgmt.join.dto.JoinServiceInptDTO;

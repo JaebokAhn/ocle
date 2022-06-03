@@ -1,6 +1,5 @@
-package com.yeol.ocle.controller.join.join.modelattr;
+package com.yeol.ocle.controller.join.join.dto;
 
-import com.yeol.ocle.comn.cmdto.ComnMsgeDTO;
 import lombok.Data;
 
 import javax.validation.constraints.Size;

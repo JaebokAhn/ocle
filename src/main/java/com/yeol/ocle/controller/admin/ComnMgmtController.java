@@ -5,7 +5,7 @@ import com.yeol.ocle.comn.consts.OcleConst;
 import com.yeol.ocle.comn.exception.BizOcleException;
 import com.yeol.ocle.comn.message.MessageService;
 import com.yeol.ocle.comn.utils.OcleUtils;
-import com.yeol.ocle.controller.admin.modelattr.IntgCodeDTO;
+import com.yeol.ocle.controller.admin.dto.IntgCodeDTO;
 import com.yeol.ocle.repository.intgcode.IntgCodeValRepository;
 import com.yeol.ocle.service.intgcodemgmt.IntgCodeMgmtService;
 import lombok.extern.slf4j.Slf4j;
@@ -98,15 +98,17 @@ public class ComnMgmtController {
     /**
      * 통합코드값목록 조회
      * @param model
-     * @param intgCodeId
+     * @param intgCode
      * @return
      */
     @PostMapping("/IntgCodeMgmtT01")
     public String IntgCodeMgmtT01(
             Model model,
-            @RequestParam(value = "intgCodeId") String intgCodeId
+            @RequestBody IntgCodeDTO intgCode
     ) {
-        log.info("intgCodeId : {} ", intgCodeId);
+        log.info("intgCodeId : {} ", intgCode.getIntgCodeId());
+
+        String intgCodeId = intgCode.getIntgCodeId();
 
         //통합코드값 목록
         List<Object> intgCodeValList = intgCodeValRepository.findByIntgCodeId(intgCodeId);

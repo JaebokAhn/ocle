@@ -3,7 +3,6 @@ package com.yeol.ocle.controller.sample;
 import com.yeol.ocle.comn.consts.OcleConst;
 import com.yeol.ocle.comn.exception.BizOcleException;
 import com.yeol.ocle.comn.message.MessageService;
-import com.yeol.ocle.controller.join.join.modelattr.JoinInptDTO;
 import com.yeol.ocle.service.aws.s3.S3Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

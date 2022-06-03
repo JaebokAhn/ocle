@@ -7,26 +7,50 @@
 <head>
     <title>통합코드조회</title>
     <script th:inline="javascript">
-        /*<![CDATA[*/
+        $(document).ready(function() {
+            /*<![CDATA[*/
+            var intgCodeList = [[${intgCodeList.content}]];
+            /*]]>*/
 
-        /*]]>*/
+            if(intgCodeList.length > 0) {
+                selectIntgCodeValList(intgCodeList[0].intgCodeId);
+            }
+        });
 
+        /**
+         * 통합코드값목록조회
+         */
         function selectIntgCodeValList(intgCodeId) {
-            var input = new DataSet();
-            input.put("intgCodeId", intgCodeId);
+            var input = {
+                    "intgCodeId": intgCodeId
+                };
 
-            submitAjax(null, {
+            submitAjax({
                 url: "/admin/comnmgmt/IntgCodeMgmtT01",
-                data: input.getParam(),
+                data: JSON.stringify(input),
                 async: true,
-                success:function(data) {
+                success: function(data) {
                     $(".tab_content").eq(0).html(data);
                 }
             });
         }
 
+        /**
+         * 통합코드저장
+         */
         function saveIntgCode() {
+            var input = $("#saveIntgCodeForm").serializeObject();
 
+            submitAjax({
+                url: "/api/admin/intgcode/IntnCodeMgmtAPI001c",
+                data: JSON.stringify(input),
+                async : false,
+                success: function(data) {
+                    alert(data)
+                }, error : function(data) {
+                    alert(data)
+                }
+            });
         }
     </script>
 </head>
@@ -105,16 +129,16 @@
     <div>totalPage : <span th:text="${pageNavInfo.totalPage}"></span></div>
     -->
     <h6 class="py-4 mt-4">통합코드추가</h6>
-    <form method="post">
+    <form method="post" id="saveIntgCodeForm">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text"><label>통합코드ID</label></span>
-            <input type="text" class="form-control">
+            <input name="intgCodeId" type="text" class="form-control">
             <span class="input-group-text"><label>통합코드명</label></span>
-            <input type="text" class="form-control">
+            <input name="intgCodeNm" type="text" class="form-control">
         </div>
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text"><label>설명내용</label></span>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <textarea name="intcCntn" class="form-control" aria-label="With textarea"></textarea>
             <a class="btn btn-outline-secondary" type="button" href="#"
                th:onclick="saveIntgCode(); return false;">추가</a>
         </div>
