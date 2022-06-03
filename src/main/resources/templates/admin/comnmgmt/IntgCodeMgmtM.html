@@ -9,7 +9,7 @@
     <script th:inline="javascript">
         $(document).ready(function() {
             /*<![CDATA[*/
-            var intgCodeList = [[${intgCodeList.content}]];
+            var intgCodeList = /*[[${intgCodeList.content}]]*/ [{"intgCodeId" : "JOIN_MTHD_DVSN_CODE"}];
             /*]]>*/
 
             if(intgCodeList.length > 0) {
