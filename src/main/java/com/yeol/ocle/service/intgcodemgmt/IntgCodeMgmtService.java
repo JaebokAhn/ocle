@@ -4,6 +4,7 @@ import com.yeol.ocle.comn.consts.OcleConst;
 import com.yeol.ocle.comn.utils.OcleUtils;
 import com.yeol.ocle.controller.admin.dto.IntgCodeDTO;
 import com.yeol.ocle.model.intgcode.IntgCode;
+import com.yeol.ocle.model.intgcode.IntgCodeVal;
 import com.yeol.ocle.repository.intgcode.IntgCodeRepository;
 import com.yeol.ocle.repository.intgcode.IntgCodeValRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +47,24 @@ public class IntgCodeMgmtService {
 
         /** 통합코드저장 */
         saveRslt = intgCodeRepository.save(intgCode);
+
+        return saveRslt;
+    }
+
+    /**
+     * 통합코드저장
+     * @param intgCodeVal
+     * @return
+     */
+    public IntgCodeVal saveIntgCodeVal(IntgCodeVal intgCodeVal) {
+
+        IntgCodeVal saveRslt = null;
+
+        //삭제여부 null인 경우 N으로 세팅
+        intgCodeVal.setDltnYn(OcleUtils.nvlToString(intgCodeVal.getDltnYn(), OcleConst.GENERAL_N));
+
+        /** 통합코드저장 */
+        saveRslt = intgCodeValRepository.save(intgCodeVal);
 
         return saveRslt;
     }

@@ -10,7 +10,9 @@ import com.yeol.ocle.config.security.auth.PrincipalDetails;
 import com.yeol.ocle.controller.GenericApiController;
 import com.yeol.ocle.controller.admin.dto.IntgCodeDTO;
 import com.yeol.ocle.controller.api.admin.dto.IntgCodeApiDTO;
+import com.yeol.ocle.controller.api.admin.dto.IntgCodeValApiDTO;
 import com.yeol.ocle.model.intgcode.IntgCode;
+import com.yeol.ocle.model.intgcode.IntgCodeVal;
 import com.yeol.ocle.model.userinfo.User;
 import com.yeol.ocle.service.intgcodemgmt.IntgCodeMgmtService;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +52,7 @@ public class IntgCodeMgmtAPI extends GenericApiController<IntgCode, String> {
 
     /**
      * 통합코드저장
+     *
      * @param intgCodeApi
      * @return
      */
@@ -61,7 +64,7 @@ public class IntgCodeMgmtAPI extends GenericApiController<IntgCode, String> {
             log.info("IntgCodeMgmtAPI.saveIntgCode START");
 
             //참고) @RequestBody는 Validator를 사용할 수 없음.
-            if(bindingResult.hasErrors()) {
+            if (bindingResult.hasErrors()) {
                 comnMsge = OcleUtils.convertBindingResultToComnMsge(bindingResult);
 
                 return new ResponseEntity(comnMsge, HttpStatus.OK);
@@ -73,7 +76,7 @@ public class IntgCodeMgmtAPI extends GenericApiController<IntgCode, String> {
             /** 통합코드관리서비스.통합코드저장 OP 호출 */
             IntgCode saveRslt = intgCodeMgmtService.saveIntgCode(intgCode);
 
-            if(ObjectUtils.isEmpty(saveRslt)) {
+            if (ObjectUtils.isEmpty(saveRslt)) {
                 /* {0} 처리 중 오류가 발생하였습니다. */
                 throw new BizOcleException("COMN0003", "통합코드저장");
             }
@@ -87,12 +90,68 @@ public class IntgCodeMgmtAPI extends GenericApiController<IntgCode, String> {
             comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_E);   //처리결과코드 : E (오류)
 
             /* Biz 오류인 경우 */
-            if(e.getClass().equals(BizOcleException.class)) {
+            if (e.getClass().equals(BizOcleException.class)) {
                 BizOcleException eb = (BizOcleException) e;
                 comnMsge.setMsgeCode(eb.getMessageId());
-                comnMsge.setMsgeCntn( messageService.getMessage(eb.getMessageId(), eb.getArguments()));
-            
-            /* 시스템 오류 */
+                comnMsge.setMsgeCntn(messageService.getMessage(eb.getMessageId(), eb.getArguments()));
+
+                /* 시스템 오류 */
+            } else {
+                comnMsge.setMsgeCode(OcleConst.MSGE_CODE_SYSE0001);
+                comnMsge.setMsgeCntn(messageService.getMessage(OcleConst.MSGE_CODE_SYSE0001));
+            }
+            return new ResponseEntity(comnMsge, HttpStatus.OK);
+        }
+
+        return new ResponseEntity(comnMsge, HttpStatus.CREATED);
+    }
+
+    /**
+     * 통합코드값저장
+     *
+     * @param intgCodeValApi
+     * @return
+     */
+    @PostMapping("/IntnCodeMgmtAPI002c")
+    public ResponseEntity<?> saveIntgCodeVal(@Valid @RequestBody IntgCodeValApiDTO intgCodeValApi,
+                                          BindingResult bindingResult) {
+        ComnMsgeDTO comnMsge = null;
+        try {
+            log.info("IntgCodeMgmtAPI.saveIntgCodeVal START");
+
+            //참고) @RequestBody는 Validator를 사용할 수 없음.
+            if (bindingResult.hasErrors()) {
+                comnMsge = OcleUtils.convertBindingResultToComnMsge(bindingResult);
+
+                return new ResponseEntity(comnMsge, HttpStatus.OK);
+            }
+
+            //통합코드 MODEL
+            IntgCodeVal intgCodeVal = BeanCopyUtils.copyDto(intgCodeValApi, IntgCodeVal.class);
+
+            /** 통합코드관리서비스.통합코드저장 OP 호출 */
+            IntgCodeVal saveRslt = intgCodeMgmtService.saveIntgCodeVal(intgCodeVal);
+
+            if (ObjectUtils.isEmpty(saveRslt)) {
+                /* {0} 처리 중 오류가 발생하였습니다. */
+                throw new BizOcleException("COMN0003", "통합코드값저장");
+            }
+
+            /* 처리가 완료되었습니다. */
+            comnMsge = OcleUtils.getNormPrcsRsltMsge();
+
+            log.info("IntgCodeMgmtAPI.saveIntgCodeVal END");
+        } catch (Exception e) {
+            comnMsge = new ComnMsgeDTO();
+            comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_E);   //처리결과코드 : E (오류)
+
+            /* Biz 오류인 경우 */
+            if (e.getClass().equals(BizOcleException.class)) {
+                BizOcleException eb = (BizOcleException) e;
+                comnMsge.setMsgeCode(eb.getMessageId());
+                comnMsge.setMsgeCntn(messageService.getMessage(eb.getMessageId(), eb.getArguments()));
+
+                /* 시스템 오류 */
             } else {
                 comnMsge.setMsgeCode(OcleConst.MSGE_CODE_SYSE0001);
                 comnMsge.setMsgeCntn(messageService.getMessage(OcleConst.MSGE_CODE_SYSE0001));
