@@ -17,7 +17,8 @@ import javax.persistence.Table;
 @Table(name = "intg_code")
 public class IntgCode extends CommonEntity {
     @Id
-    @Column(name="intg_code_id", length = 29, columnDefinition = "varchar(29) not null comment '통합코드ID'")
+    @Column(name="intg_code_id", length = 29, nullable = false, updatable = false,
+            columnDefinition = "varchar(29) not null comment '통합코드ID'")
     private String intgCodeId;
 
     @Column(name="intg_code_nm", length = 600, columnDefinition = "varchar(600) not null comment '통합코드명'")

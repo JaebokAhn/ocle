@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -16,11 +17,15 @@ import javax.persistence.*;
 @Table(name = "intg_code_val")
 public class IntgCodeVal extends CommonEntity {
     @Id
-    @Column(name="intg_code_id", length = 29, columnDefinition = "varchar(29) not null comment '통합코드ID'")
+    @NotNull
+    @Column(name="intg_code_id", length = 29, updatable = false,
+            columnDefinition = "varchar(29) not null comment '통합코드ID'")
     private String intgCodeId;
 
     @Id
-    @Column(name="intg_code_val", length = 100, columnDefinition = "varchar(100) not null comment '통합코드값'")
+    @NotNull
+    @Column(name="intg_code_val", length = 100, nullable = false, updatable = false,
+            columnDefinition = "varchar(100) not null comment '통합코드값'")
     private String intgCodeVal;
 
     @Column(name="intg_code_val_nm", length = 600, columnDefinition = "varchar(600) not null comment '통합코드값명'")

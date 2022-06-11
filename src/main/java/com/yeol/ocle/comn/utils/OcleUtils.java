@@ -1,6 +1,7 @@
 package com.yeol.ocle.comn.utils;
 
 import com.yeol.ocle.comn.cmdto.ComnMsgeDTO;
+import com.yeol.ocle.comn.cmdto.ComnMsgeDetlDTO;
 import com.yeol.ocle.comn.cmdto.PageNavInfoDTO;
 import com.yeol.ocle.comn.consts.OcleConst;
 import org.springframework.data.domain.Page;
@@ -84,38 +85,61 @@ public final class OcleUtils {
      * @return
      */
     public static ComnMsgeDTO convertBindingResultToComnMsge (BindingResult bindingResult) {
-        ComnMsgeDTO comnMsge = new ComnMsgeDTO();
+        ComnMsgeDTO comnMsge = null;
 
         if(!bindingResult.hasErrors()) {
             //처리결과코드 : O (정상)
-            comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_O);
-            comnMsge.setMsgeCntn("정상적으로 처리되었습니다.");
+//            comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_O);
+//            comnMsge.setMsgeCntn("정상적으로 처리되었습니다.");
             return comnMsge;
         }
 
         FieldError firstError = (FieldError) bindingResult.getAllErrors().get(0);
 
         //처리결과코드 : E (오류)
+        comnMsge = new ComnMsgeDTO();
         comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_E);
         comnMsge.setMsgeCode(firstError.getCode());  //메시지코드
         comnMsge.setMsgeCntn(firstError.getDefaultMessage());    //메시지내용
 
-        //BindingResult 결과 처리용 필드 목록
-        List<String> fieldList = new ArrayList<>();
-
-        //BindingResult 결과 처리용 메시지 목록
-        List<String> msgeList = new ArrayList<>();
+        //BindingResult 결과 처리용 메시지상세목록
+        List<ComnMsgeDetlDTO> msgeDeilList = new ArrayList<ComnMsgeDetlDTO>();
 
         bindingResult.getAllErrors().forEach(error -> {
             FieldError fieldError = (FieldError) error;
 
-            fieldList.add(fieldError.getField());
-            msgeList.add(fieldError.getDefaultMessage());
+            ComnMsgeDetlDTO comnMsgeDetl = new ComnMsgeDetlDTO();
+
+            comnMsgeDetl.setFieldName(fieldError.getField());   //필드명
+            comnMsgeDetl.setMsgeCode(fieldError.getCode()); //메시지코드
+            comnMsgeDetl.setMsgeCntn(fieldError.getDefaultMessage());   //메시지내용
+
+            msgeDeilList.add(comnMsgeDetl);
         });
 
-        comnMsge.setFieldList(fieldList);
-        comnMsge.setMsgeList(msgeList);
+        comnMsge.setMsgeDetlList(msgeDeilList); //메시지상세목록
+        return comnMsge;
+    }
 
+    /**
+     * 정상처리결과메시지
+     * @return ComnMsgeDTO comnMsge
+     */
+    public static ComnMsgeDTO getNormPrcsRsltMsge() {
+        ComnMsgeDTO comnMsge = new ComnMsgeDTO();
+        comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_O);   //처리결과코드 : O (정상)
+        comnMsge.setMsgeCntn("정상적으로 처리되었습니다.");
+        return comnMsge;
+    }
+
+    /**
+     * 정상조회결과메시지
+     * @return ComnMsgeDTO comnMsge
+     */
+    public static ComnMsgeDTO getNormInqyRsltMsge() {
+        ComnMsgeDTO comnMsge = new ComnMsgeDTO();
+        comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_O);   //처리결과코드 : O (정상)
+        comnMsge.setMsgeCntn("조회가 완료되었습니다.");
         return comnMsge;
     }
 }

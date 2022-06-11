@@ -18,6 +18,7 @@ public interface IntgCodeRepository extends JpaRepository<IntgCode, String> {
     @Query("select ic " +
             "from IntgCode ic " +
             "where ic.intgCodeId like %?1% " +
-            "and ic.intgCodeNm like %?2% ")
+            "and ic.intgCodeNm like %?2% " +
+            "and ic.dltnYn = 'N'")
     Page<Object> findBySearchCondition(String intgCodeId, String intgCodeNm, Pageable pageable);
 }

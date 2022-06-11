@@ -1,13 +1,13 @@
 package com.yeol.ocle.model.userinfo;
 
 import com.yeol.ocle.model.comn.CommonEntity;
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -16,7 +16,9 @@ import javax.persistence.*;
 @Table(name = "user")
 public class User extends CommonEntity {
     @Id
-    @Column(length = 100, columnDefinition = "varchar(100) not null comment '사용자ID'")
+    @NotNull
+    @Column(length = 100, updatable = false,
+            columnDefinition = "varchar(100) not null comment '사용자ID'")
     private String username;    //사용자ID
 
     @NotNull

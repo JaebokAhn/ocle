@@ -1,5 +1,6 @@
 package com.yeol.ocle.service.intgcodemgmt;
 
+import com.yeol.ocle.comn.consts.OcleConst;
 import com.yeol.ocle.comn.utils.OcleUtils;
 import com.yeol.ocle.controller.admin.dto.IntgCodeDTO;
 import com.yeol.ocle.model.intgcode.IntgCode;
@@ -32,14 +33,21 @@ public class IntgCodeMgmtService {
     private IntgCodeValRepository intgCodeValRepository;
 
     /**
-     * 통합코드등록
+     * 통합코드저장
      * @param intgCode
      * @return
      */
-    public int insertIntgCode(IntgCode intgCode) {
-        int insertIntgCodeRslt = 0;
+    public IntgCode saveIntgCode(IntgCode intgCode) {
 
-        return insertIntgCodeRslt;
+        IntgCode saveRslt = null;
+
+        //삭제여부 null인 경우 N으로 세팅
+        intgCode.setDltnYn(OcleUtils.nvlToString(intgCode.getDltnYn(), OcleConst.GENERAL_N));
+
+        /** 통합코드저장 */
+        saveRslt = intgCodeRepository.save(intgCode);
+
+        return saveRslt;
     }
 
     /**

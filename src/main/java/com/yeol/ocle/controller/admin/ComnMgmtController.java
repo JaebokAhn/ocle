@@ -84,12 +84,12 @@ public class ComnMgmtController {
             model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_E);
             model.addAttribute("msgeCode", e.getMessageId());
             model.addAttribute("msgeCntn", messageService.getMessage(e.getMessageId(), e.getArguments()));
-            return this.getViewName("joinForm");
+            return this.getViewName("IntgCodeMgmtM");
         } catch (Exception e) {
             model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_E);
             model.addAttribute("msgeCode", OcleConst.MSGE_CODE_SYSE0001);
             model.addAttribute("msgeCntn", messageService.getMessage(OcleConst.MSGE_CODE_SYSE0001));
-            return this.getViewName("joinForm");
+            return this.getViewName("IntgCodeMgmtM");
         }
 
         return this.getViewName("IntgCodeMgmtM");
@@ -114,6 +114,7 @@ public class ComnMgmtController {
         List<Object> intgCodeValList = intgCodeValRepository.findByIntgCodeId(intgCodeId);
 
         model.addAttribute("intgCodeValList", intgCodeValList);
+
         return this.getViewName("IntgCodeMgmtM :: #intgCodeMgmtT01");
     }
 

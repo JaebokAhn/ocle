@@ -1,7 +1,8 @@
 package com.yeol.ocle.service.alarm.emailsender.dto;
 
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.Data;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 public class EmailSenderServiceInptDTO {
