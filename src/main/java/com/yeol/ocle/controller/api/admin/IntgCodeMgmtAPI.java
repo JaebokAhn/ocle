@@ -86,21 +86,7 @@ public class IntgCodeMgmtAPI extends GenericApiController<IntgCode, String> {
 
             log.info("IntgCodeMgmtAPI.saveIntgCode END");
         } catch (Exception e) {
-            comnMsge = new ComnMsgeDTO();
-            comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_E);   //처리결과코드 : E (오류)
-
-            /* Biz 오류인 경우 */
-            if (e.getClass().equals(BizOcleException.class)) {
-                BizOcleException eb = (BizOcleException) e;
-                comnMsge.setMsgeCode(eb.getMessageId());
-                comnMsge.setMsgeCntn(messageService.getMessage(eb.getMessageId(), eb.getArguments()));
-
-                /* 시스템 오류 */
-            } else {
-                comnMsge.setMsgeCode(OcleConst.MSGE_CODE_SYSE0001);
-                comnMsge.setMsgeCntn(messageService.getMessage(OcleConst.MSGE_CODE_SYSE0001));
-            }
-            return new ResponseEntity(comnMsge, HttpStatus.OK);
+            return messageService.exceptionApiRslt(e);
         }
 
         return new ResponseEntity(comnMsge, HttpStatus.CREATED);
@@ -142,21 +128,7 @@ public class IntgCodeMgmtAPI extends GenericApiController<IntgCode, String> {
 
             log.info("IntgCodeMgmtAPI.saveIntgCodeVal END");
         } catch (Exception e) {
-            comnMsge = new ComnMsgeDTO();
-            comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_E);   //처리결과코드 : E (오류)
-
-            /* Biz 오류인 경우 */
-            if (e.getClass().equals(BizOcleException.class)) {
-                BizOcleException eb = (BizOcleException) e;
-                comnMsge.setMsgeCode(eb.getMessageId());
-                comnMsge.setMsgeCntn(messageService.getMessage(eb.getMessageId(), eb.getArguments()));
-
-                /* 시스템 오류 */
-            } else {
-                comnMsge.setMsgeCode(OcleConst.MSGE_CODE_SYSE0001);
-                comnMsge.setMsgeCntn(messageService.getMessage(OcleConst.MSGE_CODE_SYSE0001));
-            }
-            return new ResponseEntity(comnMsge, HttpStatus.OK);
+            return messageService.exceptionApiRslt(e);
         }
 
         return new ResponseEntity(comnMsge, HttpStatus.CREATED);

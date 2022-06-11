@@ -9,10 +9,16 @@
     <script th:inline="javascript">
         $(document).ready(function() {
             /*<![CDATA[*/
-            var intgCodeList = /*[[${intgCodeList.content}]]*/ [{"intgCodeId" : "JOIN_MTHD_DVSN_CODE"}];
+            var prcsRsltCode = /*[[${prcsRsltCode}]]*/  "O";
+            var intgCodeList = /*[[${intgCodeList?.content}]]*/ [{"intgCodeId" : "JOIN_MTHD_DVSN_CODE"}];
+            var msgeCntn = /*[[${msgeCntn}]]*/ "";
             /*]]>*/
+            
+            if(OcleConst.PRCS_RSLT_CODE_E == prcsRsltCode) {
+                alert(msgeCntn);
+            }
 
-            if(intgCodeList.length > 0) {
+            if(intgCodeList && intgCodeList.length > 0) {
                 selectIntgCodeValList(intgCodeList[0].intgCodeId);
             }
         });
@@ -107,18 +113,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${#lists.isEmpty(intgCodeList.content)}">
-            <td colspan="3" class="text-center">조회 할 내용이 없습니다.</td>
-        </tr>
-        <tr th:if="${not #lists.isEmpty(intgCodeList.content)}"
-            th:each="intgCode : ${intgCodeList.content}">
-            <td class="text-center">
-                <a th:text="${intgCode.intgCodeId}" href="#"
-                   th:onclick="selectIntgCodeValList([[${intgCode.intgCodeId}]]); return false;">통합코드ID</a>
-            </td>
-            <td class="text-center" th:text="${intgCode.intgCodeNm}">통합코드명</td>
-            <td th:text="${intgCode.intcCntn}">설명내용</td>
-        </tr>
+            <tr th:if="${intgCodeList} eq null or ${#lists.isEmpty(intgCodeList.content)}">
+                <td colspan="3" class="text-center">조회 할 내용이 없습니다.</td>
+            </tr>
+            <tr th:if="${intgCodeList} ne null and ${not #lists.isEmpty(intgCodeList.content)}"
+                th:each="intgCode : ${intgCodeList?.content}">
+                <td class="text-center">
+                    <a th:text="${intgCode.intgCodeId}" href="#"
+                       th:onclick="selectIntgCodeValList([[${intgCode.intgCodeId}]]); return false;">통합코드ID</a>
+                </td>
+                <td class="text-center" th:text="${intgCode.intgCodeNm}">통합코드명</td>
+                <td th:text="${intgCode.intcCntn}">설명내용</td>
+            </tr>
         </tbody>
     </table>
     <!--STR : PAGE NAVIGATION-->
@@ -149,11 +155,6 @@
         </nav>
     </div>
 
-    <!--
-    <div>총 건수 : <span th:text="${intgCodeList.totalElements}"></span></div>
-    <div>currPage : <span th:text="${pageNavInfo.currPage}"></span></div>
-    <div>totalPage : <span th:text="${pageNavInfo.totalPage}"></span></div>
-    -->
     <h6 class="py-4 mt-4">통합코드추가</h6>
     <form method="post" id="saveIntgCodeForm">
         <div class="input-group input-group-sm mb-3">
@@ -176,10 +177,10 @@
             <li class="nav-item">
                 <a class="nav-link active" href="#">유효값</a>
             </li>
-            <!--
             <li class="nav-item">
-                <a class="nav-link" href="#"></a>
+                <a class="nav-link" href="#">기본정보</a>
             </li>
+            <!--
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
@@ -188,7 +189,7 @@
             </li>-->
         </ul>
         <div class="tab_content py-3" style="min-height: 300px;" id="intgCodeMgmtT01">
-            <table class="table table-dark table-striped" id="tblIntgCodeVal">
+            <table class="table table-dark table-striped">
                 <colgroup>
                     <col width="20%"/>
                     <col width="20%"/>
@@ -233,6 +234,40 @@
                        th:onclick="saveIntgCodeVal(); return false;">추가</a>
                 </div>
             </form>
+        </div>
+        <div class="tab_content py-3" style="min-height: 300px; display: none;" id="intgCodeMgmtT02">
+            <table class="table table-dark table-striped">
+                <colgroup>
+                    <col width="20%"/>
+                    <col width="30%"/>
+                    <col width="20%"/>
+                    <col width="*"/>
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th>통합코드ID</th>
+                        <td></td>
+                        <th>통합코드명</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>설명내용</th>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <th>등록자</th>
+                        <td></td>
+                        <th>등록일시</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>수정자</th>
+                        <td></td>
+                        <th>수정일시</th>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

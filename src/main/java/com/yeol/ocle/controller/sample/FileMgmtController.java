@@ -61,18 +61,8 @@ public class FileMgmtController {
 
             model.addAttribute("fileUrl", fileUrl);
 
-        } catch (BizOcleException e) {
-            model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_E);
-            model.addAttribute("msgeCode", e.getMessageId());
-            model.addAttribute("msgeCntn", messageService.getMessage(e.getMessageId(), e.getArguments()));
-            return this.getViewName("fileupload");
         } catch (Exception e) {
-            e.printStackTrace();    //[TODO] 삭제 필요
-
-            model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_E);
-            model.addAttribute("msgeCode", OcleConst.MSGE_CODE_SYSE0001);
-            model.addAttribute("msgeCntn", messageService.getMessage(OcleConst.MSGE_CODE_SYSE0001));
-            return this.getViewName("fileupload");
+            return messageService.exceptionPageRslt(e, model, this.getViewName("fileupload"));
         }
 
         return this.getViewName("fileupload");

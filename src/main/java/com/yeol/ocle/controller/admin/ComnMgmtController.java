@@ -6,6 +6,7 @@ import com.yeol.ocle.comn.exception.BizOcleException;
 import com.yeol.ocle.comn.message.MessageService;
 import com.yeol.ocle.comn.utils.OcleUtils;
 import com.yeol.ocle.controller.admin.dto.IntgCodeDTO;
+import com.yeol.ocle.controller.admin.dto.IntgMsgeDTO;
 import com.yeol.ocle.repository.intgcode.IntgCodeValRepository;
 import com.yeol.ocle.service.intgcodemgmt.IntgCodeMgmtService;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +65,6 @@ public class ComnMgmtController {
         try {
             log.info("ComnMgmtController.IntgCodeMgmtM START");
 
-
             if(inqyInpt == null) {
                 inqyInpt = new IntgCodeDTO();
             }
@@ -80,16 +80,13 @@ public class ComnMgmtController {
 
             //통합코드목록
             model.addAttribute("intgCodeList", intgCodeList);
-        } catch (BizOcleException e) {
-            model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_E);
-            model.addAttribute("msgeCode", e.getMessageId());
-            model.addAttribute("msgeCntn", messageService.getMessage(e.getMessageId(), e.getArguments()));
-            return this.getViewName("IntgCodeMgmtM");
+
+            model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_O);
         } catch (Exception e) {
-            model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_E);
-            model.addAttribute("msgeCode", OcleConst.MSGE_CODE_SYSE0001);
-            model.addAttribute("msgeCntn", messageService.getMessage(OcleConst.MSGE_CODE_SYSE0001));
-            return this.getViewName("IntgCodeMgmtM");
+            model.addAttribute("inqyInpt", new IntgCodeDTO());
+            model.addAttribute("pageNavInfo", new PageNavInfoDTO());
+
+            return messageService.exceptionPageRslt(e, model, this.getViewName("IntgCodeMgmtM"));
         }
 
         return this.getViewName("IntgCodeMgmtM");
@@ -124,7 +121,17 @@ public class ComnMgmtController {
      * @return
      */
     @GetMapping("/IntgMsgeMgmtM")
-    public String IntgMsgeMgmtM(Model model) {
+    public String IntgMsgeMgmtM(
+            Model model,
+            @ModelAttribute("inqyInpt") IntgMsgeDTO inqyInpt,
+            @PageableDefault(page = 0, size = 10, sort = "intgMsgeId", direction = Sort.Direction.ASC) Pageable pageable) {
+
+        try {
+            log.info("ComnMgmtController.IntgCodeMgmtM START");
+
+        } catch (Exception e) {
+            return messageService.exceptionPageRslt(e, model, this.getViewName("IntgMsgeMgmtM"));
+        }
 
         return this.getViewName("IntgMsgeMgmtM");
     }

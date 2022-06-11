@@ -1,11 +1,17 @@
 package com.yeol.ocle.comn.message;
 
+import com.yeol.ocle.comn.cmdto.ComnMsgeDTO;
+import com.yeol.ocle.comn.consts.OcleConst;
+import com.yeol.ocle.comn.exception.BizOcleException;
 import com.yeol.ocle.comn.utils.OcleUtils;
 import com.yeol.ocle.model.intgmsge.IntgMsge;
 import com.yeol.ocle.repository.intgmsge.IntgMsgeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.util.NumberUtils;
 
 @Slf4j
@@ -96,5 +102,59 @@ public class MessageService {
             e.printStackTrace();
         }
         return message;
+    }
+
+    /**
+     * API EXCEPTION RETURN
+     * @param e
+     * @return
+     */
+    public ResponseEntity<?> exceptionApiRslt(Exception e) {
+        ComnMsgeDTO comnMsge = new ComnMsgeDTO();
+
+        comnMsge.setPrcsRsltCode(OcleConst.PRCS_RSLT_CODE_E);   //처리결과코드 : E (오류)
+
+        if (e.getClass().equals(BizOcleException.class)) {
+            /* Biz 오류인 경우 */
+
+            BizOcleException eb = (BizOcleException) e;
+            comnMsge.setMsgeCode(eb.getMessageId());
+            comnMsge.setMsgeCntn(this.getMessage(eb.getMessageId(), eb.getArguments()));
+
+        } else {
+            /* 시스템 오류 */
+
+            comnMsge.setMsgeCode(OcleConst.MSGE_CODE_SYSE0001);
+            comnMsge.setMsgeCntn(this.getMessage(OcleConst.MSGE_CODE_SYSE0001));
+        }
+
+        return new ResponseEntity<>(comnMsge, HttpStatus.OK);
+    }
+
+    /**
+     * VIEW EXCEPTION RETURN
+     * @param e
+     * @param model
+     * @param viewName
+     * @return
+     */
+    public String exceptionPageRslt(Exception e, Model model, String viewName) {
+        model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_E);
+
+        if (e.getClass().equals(BizOcleException.class)) {
+            /* Biz 오류인 경우 */
+
+            BizOcleException eb = (BizOcleException) e;
+            model.addAttribute("msgeCode", eb.getMessageId());
+            model.addAttribute("msgeCntn", this.getMessage(eb.getMessageId(), eb.getArguments()));
+
+        } else {
+            /* 시스템 오류 */
+
+            model.addAttribute("msgeCode", OcleConst.MSGE_CODE_SYSE0001);
+            model.addAttribute("msgeCntn", this.getMessage(OcleConst.MSGE_CODE_SYSE0001));
+        }
+
+        return viewName;
     }
 }
