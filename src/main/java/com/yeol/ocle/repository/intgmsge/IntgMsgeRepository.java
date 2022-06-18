@@ -45,4 +45,15 @@ public interface IntgMsgeRepository extends JpaRepository<IntgMsge, String> {
             "and im.msgeDvsnCode like %?4%" +
             "and im.dltnYn = 'N'")
     Page<Object> findBySearchCondition(String intgMsgeId, String msgeCntn, String bswrDvsnCode, String msgeDvsnCode, Pageable pageable);
+
+
+    /**
+     * MAX 통합메시지ID 조회
+     * @param bswrDvsnCode
+     * @return
+     */
+    @Query("select max(im.intgMsgeId)" +
+            "from IntgMsge im " +
+            "where im.bswrDvsnCode = ?1")
+    String findMaxIntgMsgeId(String bswrDvsnCode);
 }
