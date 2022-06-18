@@ -7,16 +7,97 @@
 <head>
     <title>통합메시지관리</title>
     <script th:inline="javascript">
+        var maxIntgMsgeIdList = [];
+
         $(document).ready(function() {
             /*<![CDATA[*/
             var prcsRsltCode = /*[[${prcsRsltCode}]]*/  "O";
             var msgeCntn = /*[[${msgeCntn}]]*/ "";
+            maxIntgMsgeIdList = /*[[${maxIntgMsgeIdList}]]*/ "";
             /*]]>*/
 
             if(OcleConst.PRCS_RSLT_CODE_E == prcsRsltCode) {
                 alert(msgeCntn);
             }
         });
+
+        //메시지내용 수정
+        function onMsgeCntnKeyUp(obj) {
+            var $obj = $(obj);
+            var status = $obj.parent().parent().find("span[name='status']");
+
+            if(status.text() != 'U') {
+                status.html('U');
+            }
+        }
+
+        //메시지 삭제
+        function fn_deleteMsge(obj) {
+            var $obj = $(obj);
+            var status = $obj.parent().parent().find("span[name='status']");
+            var btnNm = $obj.text();
+
+            if(btnNm == '삭제') {
+                $obj.html("취소");
+                status.html("D");
+            } else {
+                $obj.html("삭제");
+                status.html("");
+            }
+        }
+
+        //메시지 추가
+        function fn_addMsge() {
+            var bswrDvsnCode = $("#inputGroupSelect01").val();
+            var msgeDvsnCode = $("#inputGroupSelect02").val();
+            var intgMsgeId = "";    //통합메시지ID
+
+            if(bswrDvsnCode == 'A') {
+                alert("업무구분코드를 선택하세요.");
+                return;
+            }
+
+            if(msgeDvsnCode == 'A') {
+                alert("메시지구분코드를 선택하세요.");
+                return;
+            }
+
+            var maxIntgMsgeId = "";
+            for(var i=0; i < maxIntgMsgeIdList.length; i++) {
+                maxIntgMsgeId = maxIntgMsgeIdList[i];
+
+                if(maxIntgMsgeId.indexOf(bswrDvsnCode) > -1) {
+                    var tempArr = maxIntgMsgeId.split(bswrDvsnCode);
+                    var tempNo = Number(tempArr[1]) + 1;
+                    var tempStrNo = "";
+                    var tempNoLength = tempNo.toString().length;
+
+                    for(var j=tempNoLength; j < 4; j++) {
+                        tempStrNo += "0";
+                    }
+
+                    tempStrNo += tempNo.toString();
+                    maxIntgMsgeId = bswrDvsnCode + tempStrNo;
+                    maxIntgMsgeIdList[i] = maxIntgMsgeId;
+                    break;
+                }
+            }
+
+            var txt = '<tr>';
+            txt += '<td class="text-center">'+maxIntgMsgeId+'</td>';
+            txt += '<td class="text-center"><span name="status">C</span></td>';
+            txt += '<td class="text-center">'+bswrDvsnCode+'</td>';
+            txt += '<td class="text-center">'+msgeDvsnCode+'</td>';
+            txt += '<td><input name="msgeCntn" type="text"></td>';
+            txt += '<td></td>';
+
+            $("#tblIntgMsgeList > tbody").append(txt);
+        }
+
+        //수정사항 저장
+        function fn_saveMsge() {
+
+        }
     </script>
 </head>
 <body>
@@ -57,37 +138,48 @@
     </form>
 
     <!--STR:통합메시지목록-->
-    <table class="table table-dark table-striped">
-        <colgroup>
-            <col width="15%"/>
-            <col width="8%"/>
-            <col width="10%"/>
-            <col width="10%"/>
-            <col width="*"/>
-        </colgroup>
-        <thead>
-        <tr>
-            <th scope="col" class="text-center">통합메시지ID</th>
-            <th scope="col" class="text-center">상태</th>
-            <th scope="col" class="text-center">업무</th>
-            <th scope="col" class="text-center">구분</th>
-            <th scope="col" class="text-center">메시지내용</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${intgMsgeList} eq null or ${#lists.isEmpty(intgMsgeList.content)}">
-            <td colspan="5" class="text-center">조회 할 내용이 없습니다.</td>
-        </tr>
-        <tr th:if="${intgMsgeList} ne null and ${not #lists.isEmpty(intgMsgeList.content)}"
-            th:each="intgMsge : ${intgMsgeList?.content}">
-            <td th:text="${intgMsge.intgMsgeId}" class="text-center">통합메시지ID</td>
-            <td></td>
-            <td th:text="${intgMsge.bswrDvsnCode}" class="text-center">업무구분코드</td>
-            <td th:text="${intgMsge.msgeDvsnCode}" class="text-center">메시지구분코드</td>
-            <td th:text="${intgMsge.msgeCntn}">메시지내용</td>
-        </tr>
-        </tbody>
-    </table>
+    <form>
+        <table class="table table-dark table-striped" id="tblIntgMsgeList">
+            <colgroup>
+                <col width="15%"/>
+                <col width="8%"/>
+                <col width="10%"/>
+                <col width="10%"/>
+                <col width="*"/>
+                <col width="10%"/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th scope="col" class="text-center">통합메시지ID</th>
+                <th scope="col" class="text-center">상태</th>
+                <th scope="col" class="text-center">업무</th>
+                <th scope="col" class="text-center">구분</th>
+                <th scope="col" class="text-center">메시지내용</th>
+                <th scope="col" class="text-center">삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${intgMsgeList} eq null or ${#lists.isEmpty(intgMsgeList.content)}">
+                <td colspan="6" class="text-center">조회 할 내용이 없습니다.</td>
+            </tr>
+            <tr th:if="${intgMsgeList} ne null and ${not #lists.isEmpty(intgMsgeList.content)}"
+                th:each="intgMsge : ${intgMsgeList?.content}">
+                <td th:text="${intgMsge.intgMsgeId}" class="text-center">통합메시지ID</td>
+                <td class="text-center"><span name="status"></span></td>
+                <td th:text="${intgMsge.bswrDvsnCode}" class="text-center">업무구분코드</td>
+                <td th:text="${intgMsge.msgeDvsnCode}" class="text-center">메시지구분코드</td>
+                <td>
+                    <input name="msgeCntn" type="text" th:value="${intgMsge.msgeCntn}" onkeyup="onMsgeCntnKeyUp(this);">
+                </td>
+                <td>
+                    <button class="btn btn-secondary btn-sm"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .5rem;"
+                            type="button" onclick="fn_deleteMsge(this);">삭제</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
     <!--STR : PAGE NAVIGATION-->
     <div class="page-nav">
         <nav aria-label="Page navigation example">
@@ -128,8 +220,8 @@
         </nav>
     </div>
     <div style="text-align: right;">
-        <button class="btn btn-outline-secondary" type="button">메시지추가</button>
-        <button class="btn btn-outline-primary" type="button">저장</button>
+        <button class="btn btn-outline-secondary btn-sm" type="button" onclick="fn_addMsge();">메시지추가</button>
+        <button class="btn btn-outline-primary btn-sm" type="button" onclick="fn_saveMsge();">저장</button>
     </div>
 </div>
 </body>

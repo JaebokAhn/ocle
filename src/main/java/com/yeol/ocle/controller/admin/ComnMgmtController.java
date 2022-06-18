@@ -7,6 +7,7 @@ import com.yeol.ocle.comn.message.MessageService;
 import com.yeol.ocle.comn.utils.OcleUtils;
 import com.yeol.ocle.controller.admin.dto.IntgCodeDTO;
 import com.yeol.ocle.controller.admin.dto.IntgMsgeDTO;
+import com.yeol.ocle.model.intgcode.IntgCodeVal;
 import com.yeol.ocle.repository.intgcode.IntgCodeValRepository;
 import com.yeol.ocle.service.intgcodemgmt.IntgCodeMgmtService;
 import com.yeol.ocle.service.intgmsgemgmt.IntgMsgeMgmtService;
@@ -154,18 +155,20 @@ public class ComnMgmtController {
             
             //업무구분코드목록
             /** 통합코드관리서비스.통합코드값목록조회 */
-            List<Object> bswrDvsnCodeList = intgCodeMgmtService.selectIntgCodeValList("BSWR_DVSN_CODE");
+            List<IntgCodeVal> bswrDvsnCodeList = intgCodeMgmtService.selectIntgCodeValList("BSWR_DVSN_CODE");
             model.addAttribute("bswrDvsnCodeList", bswrDvsnCodeList);
 
             //메시지구분코드목록
             /** 통합코드관리서비스.통합코드값목록조회 */
-            List<Object> msgeDvsnCodeList = intgCodeMgmtService.selectIntgCodeValList("MSGE_DVSN_CODE");
+            List<IntgCodeVal> msgeDvsnCodeList = intgCodeMgmtService.selectIntgCodeValList("MSGE_DVSN_CODE");
             model.addAttribute("msgeDvsnCodeList", msgeDvsnCodeList);
 
             //통합메시지목록
             model.addAttribute("intgMsgeList", intgMsgeList);
 
-            
+            //MAX 통합메시지ID
+            List<String> maxIntgMsgeIdList = intgMsgeMgmtService.findMaxIntgMsgeIdList(bswrDvsnCodeList);
+            model.addAttribute("maxIntgMsgeIdList", maxIntgMsgeIdList);
 
             model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_O);
         } catch (Exception e) {

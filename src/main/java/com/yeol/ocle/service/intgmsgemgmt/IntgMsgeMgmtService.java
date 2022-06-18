@@ -2,12 +2,17 @@ package com.yeol.ocle.service.intgmsgemgmt;
 
 import com.yeol.ocle.comn.utils.OcleUtils;
 import com.yeol.ocle.controller.admin.dto.IntgMsgeDTO;
+import com.yeol.ocle.model.intgcode.IntgCodeVal;
 import com.yeol.ocle.repository.intgmsge.IntgMsgeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -42,5 +47,32 @@ public class IntgMsgeMgmtService {
         //통합메시지목록
         Page<Object> intgMsgeList = intgMsgeRepository.findBySearchCondition(intgMsgeId, msgeCntn, bswrDvsnCode, msgeDvsnCode, pageable);
         return intgMsgeList;
+    }
+
+    /**
+     * MAX 통합메시지ID 목록 조회
+     * @param bswrDvsnCodeList
+     * @return List<String> maxIntgMsgeIdList
+     */
+    public List<String> findMaxIntgMsgeIdList(List<IntgCodeVal> bswrDvsnCodeList) {
+        List<String> maxIntgMsgeIdList = new ArrayList<>();
+
+        for(IntgCodeVal intgCodeVal : bswrDvsnCodeList) {
+            String bswrDvsnCode = intgCodeVal.getIntgCodeVal();
+            String maxIntgMsgeId = "";  //max통합메시지id
+
+            if(!StringUtils.isEmpty(bswrDvsnCode)) {
+                /** max 통합메시지ID 조회 */
+                maxIntgMsgeId = intgMsgeRepository.findMaxIntgMsgeId(bswrDvsnCode);
+
+                if(StringUtils.isEmpty(maxIntgMsgeId)) {
+                    maxIntgMsgeId = bswrDvsnCode + "0000";
+                }
+
+                maxIntgMsgeIdList.add(maxIntgMsgeId);
+            }
+        }
+
+        return maxIntgMsgeIdList;
     }
 }

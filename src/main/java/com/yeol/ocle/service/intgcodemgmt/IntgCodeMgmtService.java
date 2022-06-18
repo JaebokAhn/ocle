@@ -98,8 +98,8 @@ public class IntgCodeMgmtService {
      * @param intgCodeId
      * @return List<Object> intgCodeValList
      */
-    public List<Object> selectIntgCodeValList(String intgCodeId) {
-        List<Object> intgCodeValList = intgCodeValRepository.findByIntgCodeIdAndDltnYn(intgCodeId, OcleConst.GENERAL_N);
+    public List<IntgCodeVal> selectIntgCodeValList(String intgCodeId) {
+        List<IntgCodeVal> intgCodeValList = intgCodeValRepository.findByIntgCodeIdAndDltnYn(intgCodeId, OcleConst.GENERAL_N);
         return intgCodeValList;
     }
 }

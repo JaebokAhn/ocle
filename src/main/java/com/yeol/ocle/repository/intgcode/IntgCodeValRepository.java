@@ -1,5 +1,6 @@
 package com.yeol.ocle.repository.intgcode;
 
+import com.yeol.ocle.model.intgcode.IntgCode;
 import com.yeol.ocle.model.intgcode.IntgCodeVal;
 import com.yeol.ocle.model.intgcode.idclass.IntgCodeValId;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,5 +11,5 @@ public interface IntgCodeValRepository extends JpaRepository<IntgCodeVal, IntgCo
 
     List<Object> findByIntgCodeId(String intgCodeId);
 
-    List<Object> findByIntgCodeIdAndDltnYn(String intgCodeId, String dltnYn);
+    List<IntgCodeVal> findByIntgCodeIdAndDltnYn(String intgCodeId, String dltnYn);
 }

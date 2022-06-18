@@ -20,3 +20,4 @@ table tbody table thead th {border-bottom: 1px solid #ddd}
 
 /*JB ADD*/
 div.in-valid {color: red}
+table tbody td input {width:100%;}
