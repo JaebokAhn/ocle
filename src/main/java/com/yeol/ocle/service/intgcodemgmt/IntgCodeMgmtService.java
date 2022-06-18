@@ -13,6 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 통합코드관리 서비스
  */
@@ -87,5 +90,16 @@ public class IntgCodeMgmtService {
         //통합코드목록조회
         Page<Object> intgCodeList = intgCodeRepository.findBySearchCondition(intgCodeId, intgCodeNm, pageable);
         return intgCodeList;
+    }
+
+
+    /**
+     * 통합코드값목록조회By통합코드ID
+     * @param intgCodeId
+     * @return List<Object> intgCodeValList
+     */
+    public List<Object> selectIntgCodeValList(String intgCodeId) {
+        List<Object> intgCodeValList = intgCodeValRepository.findByIntgCodeIdAndDltnYn(intgCodeId, OcleConst.GENERAL_N);
+        return intgCodeValList;
     }
 }

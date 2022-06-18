@@ -89,6 +89,8 @@
 <body>
 <div layout:fragment="content">
     <h4 class="p-3">통합코드관리</h4>
+
+    <!--STR:검색조건-->
     <form th:action="@{/admin/comnmgmt/IntgCodeMgmtM}" th:object="${inqyInpt}" method="get">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text"><label for="intgCodeId">통합코드ID</label></span>
@@ -99,6 +101,7 @@
         </div>
     </form>
 
+    <!--STR:통합코드목록-->
     <table class="table table-dark table-striped">
         <colgroup>
             <col width="20%"/>

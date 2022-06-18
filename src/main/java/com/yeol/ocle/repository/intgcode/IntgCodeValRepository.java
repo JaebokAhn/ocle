@@ -9,4 +9,6 @@ import java.util.List;
 public interface IntgCodeValRepository extends JpaRepository<IntgCodeVal, IntgCodeValId> {
 
     List<Object> findByIntgCodeId(String intgCodeId);
+
+    List<Object> findByIntgCodeIdAndDltnYn(String intgCodeId, String dltnYn);
 }

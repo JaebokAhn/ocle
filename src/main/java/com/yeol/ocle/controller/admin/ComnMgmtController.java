@@ -9,6 +9,7 @@ import com.yeol.ocle.controller.admin.dto.IntgCodeDTO;
 import com.yeol.ocle.controller.admin.dto.IntgMsgeDTO;
 import com.yeol.ocle.repository.intgcode.IntgCodeValRepository;
 import com.yeol.ocle.service.intgcodemgmt.IntgCodeMgmtService;
+import com.yeol.ocle.service.intgmsgemgmt.IntgMsgeMgmtService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,16 +41,22 @@ public class ComnMgmtController {
     private MessageService messageService;
 
     /**
-     * 공통코드관리서비스
+     * 통합코드관리서비스
      */
     @Autowired
     private IntgCodeMgmtService intgCodeMgmtService;
 
     /**
-     * 공통코드값 Repository
+     * 통합코드값 Repository
      */
     @Autowired
     private IntgCodeValRepository intgCodeValRepository;
+
+    /**
+     * 통합메시지관리서비스
+     */
+    @Autowired
+    private IntgMsgeMgmtService intgMsgeMgmtService;
 
 
     /**
@@ -65,10 +73,11 @@ public class ComnMgmtController {
         try {
             log.info("ComnMgmtController.IntgCodeMgmtM START");
 
-            if(inqyInpt == null) {
+            if(ObjectUtils.isEmpty(inqyInpt)) {
                 inqyInpt = new IntgCodeDTO();
             }
 
+            /** 통합코드관리서비스.통합코드목록조회  */
             Page<Object> intgCodeList = intgCodeMgmtService.selectIntgCodeList(inqyInpt, pageable);
 
             //검색조건 object
@@ -129,7 +138,40 @@ public class ComnMgmtController {
         try {
             log.info("ComnMgmtController.IntgCodeMgmtM START");
 
+            if(ObjectUtils.isEmpty(inqyInpt)) {
+                inqyInpt = new IntgMsgeDTO();
+            }
+
+            /** 통합메시지관리서비스.통합메시지목록조회 */
+            Page<Object> intgMsgeList = intgMsgeMgmtService.selectIntgMsgeList(inqyInpt, pageable);
+
+            //검색조건 object
+            model.addAttribute("inqyInpt", inqyInpt);
+
+            //페이징처리정보
+            PageNavInfoDTO pageNavInfo = OcleUtils.getPageNavInfo(intgMsgeList);
+            model.addAttribute("pageNavInfo", pageNavInfo);
+            
+            //업무구분코드목록
+            /** 통합코드관리서비스.통합코드값목록조회 */
+            List<Object> bswrDvsnCodeList = intgCodeMgmtService.selectIntgCodeValList("BSWR_DVSN_CODE");
+            model.addAttribute("bswrDvsnCodeList", bswrDvsnCodeList);
+
+            //메시지구분코드목록
+            /** 통합코드관리서비스.통합코드값목록조회 */
+            List<Object> msgeDvsnCodeList = intgCodeMgmtService.selectIntgCodeValList("MSGE_DVSN_CODE");
+            model.addAttribute("msgeDvsnCodeList", msgeDvsnCodeList);
+
+            //통합메시지목록
+            model.addAttribute("intgMsgeList", intgMsgeList);
+
+            
+
+            model.addAttribute("prcsRsltCode", OcleConst.PRCS_RSLT_CODE_O);
         } catch (Exception e) {
+            model.addAttribute("inqyInpt", new IntgMsgeDTO());
+            model.addAttribute("pageNavInfo", new PageNavInfoDTO());
+
             return messageService.exceptionPageRslt(e, model, this.getViewName("IntgMsgeMgmtM"));
         }
 

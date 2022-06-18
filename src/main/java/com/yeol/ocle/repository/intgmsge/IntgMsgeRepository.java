@@ -42,6 +42,7 @@ public interface IntgMsgeRepository extends JpaRepository<IntgMsge, String> {
             "where im.intgMsgeId like %?1% " +
             "and im.msgeCntn like %?2% " +
             "and im.bswrDvsnCode like %?3% " +
-            "and im.msgeDvsnCode like %?4%")
-    Page<IntgMsge> findBySearchCondition(String intgMsgeId, String msgeCntn, String bswrDvsnCode, String msgeDvsnCode, Pageable pageable);
+            "and im.msgeDvsnCode like %?4%" +
+            "and im.dltnYn = 'N'")
+    Page<Object> findBySearchCondition(String intgMsgeId, String msgeCntn, String bswrDvsnCode, String msgeDvsnCode, Pageable pageable);
 }
